@@ -1,6 +1,6 @@
 ---
 name: paper-to-storyboard
-description: Convert an academic PDF paper into a single-page scrollytelling website (index.html + style.css + script.js + extracted figures) styled like the reference at /Users/maoransun/GitHub/paper-to-storyboard/reference/. Use when the user provides a PDF and asks for a "storyboard", "scrollytelling page", "paper-to-web", "narrative website", or "convert paper to webpage".
+description: Convert an academic PDF paper into a single-page scrollytelling website (index.html + style.css + script.js + extracted figures + optional AI cover) using a fixed dark/light scroll-snap chassis. Use when the user provides a PDF and asks for a "storyboard", "scrollytelling page", "paper-to-web", "narrative website", or "convert paper to webpage".
 ---
 
 # paper-to-storyboard
@@ -166,14 +166,7 @@ Prints `http://localhost:8765/` and opens it on macOS.
 
 ## Reference
 
-The canonical example this chassis is derived from:
-
-- `/Users/maoransun/GitHub/paper-to-storyboard/reference/index.html`
-- `/Users/maoransun/GitHub/paper-to-storyboard/reference/style.css`
-- `/Users/maoransun/GitHub/paper-to-storyboard/reference/script.js`
-- `/Users/maoransun/GitHub/paper-to-storyboard/reference/rsta.2024.0567.pdf`
-
-A fully filled `storyboard.json` example: `examples/reference_storyboard.json`.
+A fully filled `storyboard.json` example ships in this skill: `examples/reference_storyboard.json`. Additional rendered examples live under `examples/` in the repo (https://github.com/<you>/paper-to-storyboard).
 
 ## Dependencies
 

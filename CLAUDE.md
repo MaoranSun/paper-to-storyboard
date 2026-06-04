@@ -13,12 +13,8 @@ paper-to-storyboard/        (this repo — the canonical source of truth)
 │   ├── palettes/themes.json
 │   ├── schemas/storyboard.schema.json
 │   └── examples/reference_storyboard.json
-├── reference/              # canonical demo for the chassis
-│   ├── rsta.2024.0567.pdf  # Sun, Pan, Zhao, Bardhan 2025 — indoor heat
-│   ├── index.html          # canonical chassis (193 lines)
-│   ├── style.css           # canonical chassis (422 lines)
-│   ├── script.js           # vanilla IntersectionObserver
-│   └── cover.png           # canonical AI-generated title cover
+├── examples/               # rendered storyboards (one self-contained dir per paper)
+│   └── <paper-shortname>/  # index.html, style.css, script.js, figures, cover
 ├── install.sh              # copies ./skill/ → ~/.claude/skills/paper-to-storyboard/
 ├── requirements.txt
 ├── README.md               # public-facing

@@ -31,7 +31,7 @@ out/
 └── storyboard.json   # the editable narrative — re-render after edits
 ```
 
-A canonical example produced by this pipeline lives at [`reference/`](reference/) — open `reference/index.html` in a browser.
+Browseable example outputs live under [`examples/`](examples/) — each subdirectory is a self-contained static site (`index.html` + `style.css` + `script.js` + transparent figures + optional cover).
 
 ## Install
 
@@ -103,9 +103,8 @@ paper-to-storyboard/
 │   ├── palettes/themes.json      # 5 palettes × 2 modes + 4 typography presets
 │   ├── schemas/storyboard.schema.json
 │   └── examples/reference_storyboard.json
-├── reference/                    # canonical demo (Sun et al. 2025, "Heat stress dichotomy")
-│   ├── index.html, style.css, script.js, cover.png
-│   └── rsta.2024.0567.pdf        # source paper
+├── examples/                     # self-contained rendered storyboards
+│   └── <paper-shortname>/        # index.html, style.css, script.js, figures, cover
 ├── install.sh
 ├── requirements.txt
 ├── CLAUDE.md                     # context for Claude Code sessions in this repo

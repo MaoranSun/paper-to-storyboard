@@ -26,6 +26,9 @@ out/
 storyboard/
 *_storyboard/
 
-# Source PDFs other than the reference (avoid accidental copyright commits)
+# Local-only reference example (kept on disk, not published)
+reference/
+
+# Source PDFs (avoid accidental copyright commits — explicit-add when intended)
 *.pdf
-!reference/*.pdf
+!examples/**/*.pdf
