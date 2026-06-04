@@ -82,3 +82,26 @@ pip install -r requirements.txt
 # openai (optional, for cover generation)
 # rembg (optional, for complex-figure bg removal)
 ```
+
+## Methods evaluated (and why we kept what we kept)
+
+A running log of alternatives we tested and rejected, so future contributors don't burn cycles re-deriving the same conclusions.
+
+### Figure background removal — kept `flood-fill`
+
+`skill/scripts/make_transparent.py` uses corner flood-fill as the only path. We tested three alternatives on a representative paper figure (a 3-branch deep-learning architecture diagram with text labels, color blocks, dense connections, and embedded house/aerial photos):
+
+| Method | Verdict | Why rejected |
+|---|---|---|
+| **`flood-fill`** (current default) | ✅ Kept | Sub-second, zero extra deps, preserves content exactly. Minor white halos near anti-aliased lines, acceptable. |
+| `rembg` + `u2net` (the rembg default) | ❌ Worse | 96% partially-transparent output — entire diagram ghostly. U2Net is trained for *salient-object* segmentation (people, products); diagrams aren't objects to it. |
+| `rembg` + `birefnet-general` | ❌ Worth keeping in mind, but not default | Actually preserves content well with proper anti-aliased edges. 973 MB model download + ~5–10 s per figure. The user evaluated and chose flood-fill anyway. |
+| OpenAI `gpt-image-1` image-edit with `background="transparent"` | ❌ Unusable for scientific figures | ~$0.04 per image. Background does come out transparent, but **every text label gets garbled** ("Conv + Pool" → "Grovan PPA", "Dense Block" → "Bilesk dolk", "Output" → "Outopf"). Topology stays roughly right but specifics drift. Could be useful as an atmospheric / decorative backdrop, not for primary figure delivery. |
+
+### Cover image generation — kept OpenAI `gpt-image-1` (generate, not edit)
+
+`skill/scripts/generate_cover.py` calls `client.images.generate()` (not `.edit()`) with a Claude-composed `--concept`. Outputs an abstract data-art cover. This works well precisely *because* there's nothing to be faithful to — we want a stylized hero image, not an accurate reproduction. The same `--background="transparent"` flag from the figure test isn't useful here (we want a full bleed image).
+
+### Layouts — `fullbleed` exists but is reserved
+
+The `fullbleed` snippet/CSS exists in the skill but is documented as "atmospheric photos only — do not use for paper figures." Reason: scientific charts at viewport scale don't read well, and the glass-panel overlay competes with the data. See also the `## Conventions` and `## Style knobs` notes above.
