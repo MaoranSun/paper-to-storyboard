@@ -38,7 +38,7 @@ Browseable example outputs live under [`examples/`](examples/) — each subdirec
 Clone, install Python deps, and install the skill into Claude Code:
 
 ```bash
-git clone https://github.com/<you>/paper-to-storyboard.git
+git clone https://github.com/MaoranSun/paper-to-storyboard.git
 cd paper-to-storyboard
 
 python3 -m venv .venv

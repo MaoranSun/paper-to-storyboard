@@ -166,7 +166,7 @@ Prints `http://localhost:8765/` and opens it on macOS.
 
 ## Reference
 
-A fully filled `storyboard.json` example ships in this skill: `examples/reference_storyboard.json`. Additional rendered examples live under `examples/` in the repo (https://github.com/<you>/paper-to-storyboard).
+A fully filled `storyboard.json` example ships in this skill: `examples/reference_storyboard.json`. Additional rendered examples live under `examples/` in the repo (https://github.com/MaoranSun/paper-to-storyboard).
 
 ## Dependencies
 
