@@ -1,6 +1,6 @@
 ---
 name: paper-to-storyboard
-description: Convert an academic PDF paper into a single-page scrollytelling website (index.html + style.css + script.js + extracted figures) styled like the reference at /Users/maoransun/GitHub/paper_2_html/reference/. Use when the user provides a PDF and asks for a "storyboard", "scrollytelling page", "paper-to-web", "narrative website", or "convert paper to webpage".
+description: Convert an academic PDF paper into a single-page scrollytelling website (index.html + style.css + script.js + extracted figures) styled like the reference at /Users/maoransun/GitHub/paper-to-storyboard/reference/. Use when the user provides a PDF and asks for a "storyboard", "scrollytelling page", "paper-to-web", "narrative website", or "convert paper to webpage".
 ---
 
 # paper-to-storyboard
@@ -11,10 +11,13 @@ Turn an academic paper PDF into a dark, scroll-snap, single-page website with th
 
 - `pdf_path` (required, absolute path)
 - `out_dir` (default: `./storyboard/`)
-- `palette` (optional: `warm | cool | earth | clinical | tech`; auto-derived from topic if omitted)
-- `mode` (optional: `dark | light`; default `dark`)
-- `typography` (optional: `editorial | modern | tech | academic`; default `editorial`)
+- `palette` (optional: `warm | cool | earth | clinical | tech`) — if omitted, **ask the user** via AskUserQuestion
+- `mode` (optional: `dark | light`) — if omitted, **ask the user**
+- `typography` (optional: `editorial | modern | tech | academic`) — if omitted, **ask the user**
+- `generate_cover` (optional: `true | false`) — if omitted, **ask the user**
 - `title_override`, `subtitle_override` (optional)
+
+When any of `palette`, `mode`, `typography`, `generate_cover` is explicitly supplied by the user when they invoke the skill, skip the corresponding question and use the supplied value.
 
 ### Style options
 
@@ -56,9 +59,30 @@ python3 ~/.claude/skills/paper-to-storyboard/scripts/make_transparent.py <out_di
 
 This writes transparent PNGs directly into `out_dir/` (alongside the templates), where the HTML references them. The default mode is corner flood-fill (good for plot figures with white backgrounds). For photos/schematics, pass `--mode rembg`. If `rembg` isn't installed, it falls back to the flood-fill mode with a warning.
 
-### 3b. (Optional) Generate a title cover image
+### 4. Ask the user for style choices
 
-If `OPENAI_API_KEY` is set in the env, generate a stylized data-art cover for the title slot. Compose a 1-sentence `--concept` describing the paper:
+Before building the storyboard, read enough of the PDF to draft a 1-sentence topic summary, then use **`AskUserQuestion`** to let the user pick the visual style. Show your recommendation as the first option in each list, label it `(Recommended)`, and explain *why* in its description.
+
+Issue these questions in a **single `AskUserQuestion` call** (batch them — don't ask one at a time):
+
+1. **Palette** — 4 options out of `warm`, `cool`, `earth`, `clinical`, `tech` (recommended first, then 3 sensible alternatives for this paper).
+   - Keyword guide for the recommendation: heat/energy/fire → `warm`; water/climate/ocean → `cool`; biology/ecology/agriculture/plants → `earth`; medicine/clinical/health/disease → `clinical`; computing/AI/ML/robotics → `tech`. Urban / cities / sociology papers often fit `cool` or `earth`. Default `warm`.
+
+2. **Mode** — 2 options: `dark`, `light`.
+   - Default `dark` (matches the reference chassis identity, more cinematic). Recommend `light` only when the paper is text-heavy with few or busy figures where readability dominates.
+
+3. **Typography** — 4 options: `editorial`, `modern`, `tech`, `academic`.
+   - Keyword guide for the recommendation: longform/humanities/policy → `editorial`; product / startup / design → `modern`; CS / AI / engineering → `tech`; medicine / scholarly / journal → `academic`.
+
+4. **Generate cover?** — 2 options: `Generate (~$0.04)`, `Skip`.
+   - In the `Generate` option's description, show the 1-sentence cover concept you'd send to the image model so the user can preview what they'd be paying for.
+   - Recommend `Generate` if `OPENAI_API_KEY` is set, otherwise `Skip`.
+
+Use the user's answers in the steps below. If the user picks `Skip` for cover, omit step 5 and don't add `cover_image` to the title section.
+
+### 5. (Optional) Generate the title cover image
+
+Only if the user picked `Generate` in step 4. Compose a 1-sentence `--concept` describing the paper:
 
 ```
 python3 ~/.claude/skills/paper-to-storyboard/scripts/generate_cover.py \
@@ -68,13 +92,13 @@ python3 ~/.claude/skills/paper-to-storyboard/scripts/generate_cover.py \
   --out <out_dir>/cover.png
 ```
 
-This calls OpenAI `gpt-image-1` (~$0.04 medium, $0.25 high — defaults to medium). The script wraps the concept into an abstract data-art prompt tinted toward the chosen palette + mode. To preview the prompt without spending: add `--prompt-only`.
+Calls OpenAI `gpt-image-1` (~$0.04 medium, $0.25 high — defaults to medium). To preview the prompt without spending: add `--prompt-only`.
 
 When `cover.png` exists in `out_dir` AND the title section in `storyboard.json` has `"cover_image": "cover.png"`, render.py automatically inlines it as the title-bg with a palette-tinted gradient overlay. If either is missing, the title slot falls back to the default gradient.
 
-If `OPENAI_API_KEY` isn't set, skip this step — the title slot still works.
+If `OPENAI_API_KEY` isn't set, generation will fail with a clear error — fall back to skipping the cover and proceed.
 
-### 4. Map content to storyboard slots
+### 6. Map content to storyboard slots
 
 Read `content.json` and `figures/figures.json`. Build a storyboard JSON object matching `schemas/storyboard.schema.json`. Save as `<out_dir>/storyboard.json`.
 
@@ -117,19 +141,7 @@ Rules for filling slots:
 - For each split-layout slot, pick a figure from `figures.json` by relevance (use the caption to judge). Same figure should not be reused across slots.
 - If the paper has fewer than 4 figures, some split-layout slots become bare (drop the image_content div).
 
-### 5. Pick a theme
-
-Look at `palettes/themes.json`. Choose a palette:
-- If `theme_hint` was supplied, use it.
-- Otherwise match topic keywords from title/abstract/keywords:
-  - heat, energy, fire, combustion → `warm`
-  - water, climate, ocean, atmospheric → `cool`
-  - biology, ecology, agriculture, plant, soil → `earth`
-  - medicine, clinical, health, disease, patient → `clinical`
-  - computing, AI, machine learning, software, robotics → `tech`
-- Default: `warm`.
-
-### 6. Emit the site
+### 7. Emit the site
 
 Copy the templates and substitute placeholders:
 
@@ -144,7 +156,7 @@ python3 ~/.claude/skills/paper-to-storyboard/scripts/render.py \
 
 This writes `index.html`, `style.css`, `script.js` to `out_dir`. The transparent figures (step 3) should already be in `out_dir`.
 
-### 7. Preview
+### 8. Preview
 
 ```
 python3 ~/.claude/skills/paper-to-storyboard/scripts/preview.py <out_dir>
@@ -156,10 +168,10 @@ Prints `http://localhost:8765/` and opens it on macOS.
 
 The canonical example this chassis is derived from:
 
-- `/Users/maoransun/GitHub/paper_2_html/reference/index.html`
-- `/Users/maoransun/GitHub/paper_2_html/reference/style.css`
-- `/Users/maoransun/GitHub/paper_2_html/reference/script.js`
-- `/Users/maoransun/GitHub/paper_2_html/reference/rsta.2024.0567.pdf`
+- `/Users/maoransun/GitHub/paper-to-storyboard/reference/index.html`
+- `/Users/maoransun/GitHub/paper-to-storyboard/reference/style.css`
+- `/Users/maoransun/GitHub/paper-to-storyboard/reference/script.js`
+- `/Users/maoransun/GitHub/paper-to-storyboard/reference/rsta.2024.0567.pdf`
 
 A fully filled `storyboard.json` example: `examples/reference_storyboard.json`.
 
