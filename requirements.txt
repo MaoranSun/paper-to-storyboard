@@ -1,0 +1,10 @@
+# Required
+pdfplumber>=0.11
+pymupdf>=1.24
+pillow>=10
+
+# Optional — only needed for cover image generation
+openai>=1.30
+
+# Optional — only needed for complex (photo / schematic) figure background removal
+# rembg>=2.0

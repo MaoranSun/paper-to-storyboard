@@ -1,0 +1,25 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.scroll-section');
+    const body = document.body;
+
+    const themes = {{THEMES_JSON}};
+
+    const observerOptions = {
+        root: document.querySelector('.story-container'),
+        threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                const sectionId = entry.target.id;
+                if (themes[sectionId]) {
+                    body.style.backgroundColor = themes[sectionId];
+                }
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
+});

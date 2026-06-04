@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heat stress dichotomy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="story-container">
+        <!-- Scroll 0: Title -->
+        <section class="scroll-section" id="section-0" data-theme="title">
+            <div class="content-wrapper">
+                <h1 class="animate-text" style="font-size: 4rem; line-height: 1.1;">The Heat is On... Inside</h1>
+                <p class="animate-text delay-1"
+                    style="font-size: 1.3rem; color: #cfcfcf; font-weight: 300; line-height: 1.8;">Why your
+                    energy-efficient home might be cooking you this summer.<br>A deep dive into 'Indoor Mini-Heatwaves'
+                    in Southwark, London.</p>
+            </div>
+            <div class="background-element title-bg"></div>
+        </section>
+
+        <!-- Scroll 1 -->
+        <section class="scroll-section" id="section-1" data-theme="warm">
+            <div class="content-wrapper split-layout">
+                <div class="text-content">
+                    <h1 class="animate-text">The Rising Heat</h1>
+                    <p class="animate-text delay-1">We all know the UK is getting hotter. Global temperatures are
+                        rising, and the UK is seeing record-breaking summers and more frequent climate extremes.</p>
+                    <p class="animate-text delay-2" style="font-size: 0.9rem; opacity: 0.8;"><a
+                            href="https://weather.metoffice.gov.uk/climate/climate-and-extreme-weather" target="_blank"
+                            style="color: inherit; text-decoration: underline;">Source: Met Office</a></p>
+                </div>
+                <div class="image-content animate-text delay-3">
+                    <img src="climateExtreme.svg" alt="Climate Extreme Graph" class="content-plot">
+                </div>
+            </div>
+            <div class="background-element"></div>
+        </section>
+
+        <!-- Scroll 2 -->
+        <section class="scroll-section" id="section-2" data-theme="warm">
+            <div class="content-wrapper split-layout">
+                <div class="text-content">
+                    <h2 class="animate-text">The Blind Spot</h2>
+                    <p class="animate-text delay-1">Currently, a heatwave is officially defined by outdoor weather
+                        stations (28°C for 3 days in London). But we don't live at weather stations; we live indoors,
+                        where buildings create their own unique weather.</p>
+                    <p class="animate-text delay-2" style="font-size: 0.9rem; opacity: 0.8;"><a
+                            href="https://weather.metoffice.gov.uk/learn-about/weather/types-of-weather/temperature/heatwave"
+                            target="_blank" style="color: inherit; text-decoration: underline;">Source: Met Office</a>
+                    </p>
+                </div>
+                <div class="image-content animate-text delay-2">
+                    <img src="outdoorHeatwave.png" alt="Outdoor Heatwave Graph" class="content-image"
+                        style="width: 80%;">
+                </div>
+            </div>
+            <div class="background-element"></div>
+        </section>
+
+        <!-- Scroll 3 -->
+        <section class="scroll-section" id="section-3" data-theme="neutral">
+            <div class="content-wrapper split-layout">
+                <div class="text-content">
+                    <h2 class="animate-text">Our Approach</h2>
+                    <p class="animate-text delay-1">To solve this problem, we put environmental sensors to 40 houses in
+                        Southwark London, during the hottest summer by record in 2023.
+                        <br>
+                        <br>
+                        These weren't just thermometers. They measured minute-by-minute data on temperature, humidity,
+                        and comfort levels to catch rapid changes that standard weather reports miss.
+                    </p>
+
+
+                </div>
+                <div class="image-content animate-text delay-2">
+                    <img src="siteMap.png" alt="Map of sensor locations in Southwark London" class="content-image">
+                </div>
+            </div>
+            <div class="background-element"></div>
+        </section>
+
+        <!-- Scroll 4 -->
+        <section class="scroll-section" id="section-4" data-theme="tech">
+            <div class="content-wrapper impact-section">
+                <h2 class="animate-text">Introducing the 'Indoor Mini-Heatwave'</h2>
+                <p class="definition-text animate-text delay-1">“An indoor mini-heatwave is a short, sharp spike in
+                    temperature exceeding the safe indoor threshold of 26°C.”</p>
+
+                <div class="comparison-stats animate-text delay-2">
+                    <div class="stat-block">
+                        <span class="big-number">2</span>
+                        <span class="stat-desc">Outdoor Heatwaves</span>
+                    </div>
+                    <div class="stat-divider">VS</div>
+                    <div class="stat-block highlight">
+                        <span class="big-number">5.35</span>
+                        <span class="stat-desc">Indoor Mini-Heatwaves (Avg)</span>
+                    </div>
+                </div>
+                <p class="animate-text delay-3"
+                    style="font-size: 1rem; opacity: 0.8; margin-top: 1rem; text-align: center; margin-left: auto; margin-right: auto;">
+                    During the study
+                    period.</p>
+            </div>
+            <div class="background-element"></div>
+        </section>
+
+        <!-- Scroll 5 -->
+        <section class="scroll-section" id="section-5" data-theme="data">
+            <div class="content-wrapper split-layout">
+                <div class="text-content">
+                    <h2 class="animate-text">Escaping the Comfort Zone</h2>
+                    <p class="animate-text delay-1">During the study, researchers tracked thousands of minutes of indoor
+                        climate data. The Blue Box represents where humans feel comfortable. The Red Dots show where
+                        residents actually lived during the heatwave—pushed far into dangerous levels of heat and
+                        humidity.</p>
+                    <div class="key-insight animate-text delay-2">
+                        <strong>Key Insight:</strong> Nearly half of the time spent indoors during heatwaves was outside
+                        the safe zone, pushing into 'Caution' and 'Extreme Caution' levels.
+                    </div>
+                </div>
+                <div class="image-content animate-text delay-3">
+                    <img src="psychrometric_chart.png" alt="Psychrometric Chart showing comfort gap"
+                        class="content-plot">
+                </div>
+            </div>
+            <div class="background-element"></div>
+        </section>
+
+        <!-- Scroll 6 -->
+        <section class="scroll-section" id="section-6" data-theme="alert">
+            <div class="content-wrapper split-layout">
+                <div class="text-content">
+                    <h2 class="animate-text">The Nighttime Lag</h2>
+                    <p class="animate-text delay-1">The heat doesn't sleep when you do. While mini-heatwaves often start
+                        around 3:00 PM, many persist late into the night.</p>
+                    <p class="animate-text delay-2">Buildings act like batteries, storing heat during the day and
+                        releasing it after sunset, disrupting sleep.</p>
+                </div>
+                <div class="image-content animate-text delay-3">
+                    <img src="lagEffect.svg" alt="Indoor vs Outdoor Temperature Lag Effect Chart" class="content-plot">
+                </div>
+            </div>
+            <div class="background-element"></div>
+        </section>
+
+        <!-- Scroll 7 -->
+        <section class="scroll-section" id="section-7" data-theme="insight">
+            <div class="content-wrapper">
+                <h2 class="animate-text">The Efficiency Paradox</h2>
+                <p class="animate-text delay-1">The study found that homes in good condition and with better Energy
+                    Performance Certificate (EPC) ratings actually got hotter. Modern efficiency traps heat inside
+                    during summer.</p>
+                <div class="call-to-action animate-text delay-2">
+                    <!-- <h3>Call to Action</h3> -->
+                    <p>We need to redesign homes for passive cooling (shading, ventilation) and redefine 'heatwaves' to
+                        include indoor risks.</p>
+                </div>
+            </div>
+            <div class="background-element"></div>
+        </section>
+
+        <!-- Scroll 8 -->
+        <section class="scroll-section" id="section-8" data-theme="footer">
+            <div class="content-wrapper">
+                <h2 class="animate-text">Publication & Team</h2>
+                <div class="links-container animate-text delay-1">
+                    <p><strong>Authors:</strong> Maoran Sun<sup>1</sup>, Jiayu Pan<sup>1</sup>, Qunshan
+                        Zhao<sup>2</sup>, Ronita Bardhan<sup>1</sup></p>
+                    <p><sup>1</sup> Sustainable Design Group, University of Cambridge,
+                        <sup>2</sup> Urban Big Data Center, University of
+                        Glasgow
+                    </p>
+                    <a href="https://royalsocietypublishing.org/doi/full/10.1098/rsta.2024.0567" class="btn-link"
+                        target="_blank">Read Original Publication</a>
+                </div>
+            </div>
+            <div class="background-element"></div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

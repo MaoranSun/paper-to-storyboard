@@ -1,0 +1,183 @@
+<!-- LAYOUT: title -->
+<section class="scroll-section" id="section-{{N}}" data-theme="{{THEME}}">
+    <div class="content-wrapper">
+        <h1 class="animate-text" style="font-size: 4rem; line-height: 1.1;">{{HEADING}}</h1>
+        <p class="animate-text delay-1 title-subtitle">{{SUBTITLE}}</p>
+    </div>
+    <div class="background-element title-bg{{COVER_CLASS}}"{{COVER_STYLE}}></div>
+</section>
+<!-- END LAYOUT: title -->
+
+<!-- LAYOUT: split -->
+<section class="scroll-section" id="section-{{N}}" data-theme="{{THEME}}">
+    <div class="content-wrapper split-layout">
+        <div class="text-content">
+            <h2 class="animate-text">{{HEADING}}</h2>
+            <p class="animate-text delay-1">{{BODY}}</p>
+            {{INSIGHT_BLOCK}}
+        </div>
+        <div class="image-content animate-text delay-3">
+            <img src="{{FIGURE}}" alt="{{FIGURE_ALT}}" class="{{IMAGE_CLASS}}">
+        </div>
+    </div>
+    <div class="background-element"></div>
+</section>
+<!-- END LAYOUT: split -->
+
+<!-- LAYOUT: split_no_image -->
+<section class="scroll-section" id="section-{{N}}" data-theme="{{THEME}}">
+    <div class="content-wrapper">
+        <h2 class="animate-text">{{HEADING}}</h2>
+        <p class="animate-text delay-1">{{BODY}}</p>
+        {{INSIGHT_BLOCK}}
+    </div>
+    <div class="background-element"></div>
+</section>
+<!-- END LAYOUT: split_no_image -->
+
+<!-- LAYOUT: impact -->
+<section class="scroll-section" id="section-{{N}}" data-theme="{{THEME}}">
+    <div class="content-wrapper impact-section">
+        <h2 class="animate-text">{{HEADING}}</h2>
+        <p class="definition-text animate-text delay-1">{{DEFINITION}}</p>
+        <div class="comparison-stats animate-text delay-2">
+            <div class="stat-block">
+                <span class="big-number">{{BIG_NUMBER_A}}</span>
+                <span class="stat-desc">{{STAT_DESC_A}}</span>
+            </div>
+            <div class="stat-divider">VS</div>
+            <div class="stat-block highlight">
+                <span class="big-number">{{BIG_NUMBER_B}}</span>
+                <span class="stat-desc">{{STAT_DESC_B}}</span>
+            </div>
+        </div>
+        <p class="animate-text delay-3"
+            style="font-size: 1rem; opacity: 0.8; margin-top: 1rem; text-align: center;">{{CAPTION}}</p>
+    </div>
+    <div class="background-element"></div>
+</section>
+<!-- END LAYOUT: impact -->
+
+<!-- LAYOUT: impact_single -->
+<section class="scroll-section" id="section-{{N}}" data-theme="{{THEME}}">
+    <div class="content-wrapper impact-section">
+        <h2 class="animate-text">{{HEADING}}</h2>
+        <p class="definition-text animate-text delay-1">{{DEFINITION}}</p>
+        <div class="comparison-stats animate-text delay-2">
+            <div class="stat-block highlight">
+                <span class="big-number">{{BIG_NUMBER_A}}</span>
+                <span class="stat-desc">{{STAT_DESC_A}}</span>
+            </div>
+        </div>
+        <p class="animate-text delay-3"
+            style="font-size: 1rem; opacity: 0.8; margin-top: 1rem; text-align: center;">{{CAPTION}}</p>
+    </div>
+    <div class="background-element"></div>
+</section>
+<!-- END LAYOUT: impact_single -->
+
+<!-- LAYOUT: insight -->
+<section class="scroll-section" id="section-{{N}}" data-theme="{{THEME}}">
+    <div class="content-wrapper">
+        <h2 class="animate-text">{{HEADING}}</h2>
+        <p class="animate-text delay-1">{{BODY}}</p>
+        <div class="call-to-action animate-text delay-2">
+            <p>{{CTA}}</p>
+        </div>
+    </div>
+    <div class="background-element"></div>
+</section>
+<!-- END LAYOUT: insight -->
+
+<!-- LAYOUT: split_reverse -->
+<section class="scroll-section" id="section-{{N}}" data-theme="{{THEME}}">
+    <div class="content-wrapper split-layout reverse">
+        <div class="image-content animate-text delay-1">
+            <img src="{{FIGURE}}" alt="{{FIGURE_ALT}}" class="{{IMAGE_CLASS}}">
+        </div>
+        <div class="text-content">
+            <h2 class="animate-text">{{HEADING}}</h2>
+            <p class="animate-text delay-2">{{BODY}}</p>
+            {{INSIGHT_BLOCK}}
+        </div>
+    </div>
+    <div class="background-element"></div>
+</section>
+<!-- END LAYOUT: split_reverse -->
+
+<!-- LAYOUT: fullbleed -->
+<section class="scroll-section fullbleed-section" id="section-{{N}}" data-theme="{{THEME}}">
+    <img src="{{FIGURE}}" alt="{{FIGURE_ALT}}" class="fullbleed-figure">
+    <div class="content-wrapper">
+        <div class="fullbleed-panel animate-text">
+            <h2 class="animate-text">{{HEADING}}</h2>
+            <p class="animate-text delay-1">{{BODY}}</p>
+        </div>
+    </div>
+</section>
+<!-- END LAYOUT: fullbleed -->
+
+<!-- LAYOUT: stacked -->
+<section class="scroll-section" id="section-{{N}}" data-theme="{{THEME}}">
+    <div class="content-wrapper stacked-layout">
+        <div class="image-content animate-text">
+            <img src="{{FIGURE}}" alt="{{FIGURE_ALT}}" class="{{IMAGE_CLASS}}">
+        </div>
+        <div class="text-content animate-text delay-1">
+            <h2>{{HEADING}}</h2>
+            <p>{{BODY}}</p>
+        </div>
+    </div>
+    <div class="background-element"></div>
+</section>
+<!-- END LAYOUT: stacked -->
+
+<!-- LAYOUT: quote -->
+<section class="scroll-section" id="section-{{N}}" data-theme="{{THEME}}">
+    <div class="content-wrapper quote-layout">
+        <blockquote class="pull-quote animate-text">{{QUOTE}}</blockquote>
+        <p class="pull-attribution animate-text delay-1">{{ATTRIBUTION}}</p>
+    </div>
+    <div class="background-element"></div>
+</section>
+<!-- END LAYOUT: quote -->
+
+<!-- LAYOUT: stats_grid -->
+<section class="scroll-section" id="section-{{N}}" data-theme="{{THEME}}">
+    <div class="content-wrapper impact-section">
+        <h2 class="animate-text">{{HEADING}}</h2>
+        <p class="animate-text delay-1" style="max-width: 700px; margin-left: auto; margin-right: auto;">{{BODY}}</p>
+        <div class="stats-grid animate-text delay-2">
+{{STAT_ITEMS}}
+        </div>
+    </div>
+    <div class="background-element"></div>
+</section>
+<!-- END LAYOUT: stats_grid -->
+
+<!-- LAYOUT: comparison -->
+<section class="scroll-section" id="section-{{N}}" data-theme="{{THEME}}">
+    <div class="content-wrapper">
+        <h2 class="animate-text" style="text-align: center;">{{HEADING}}</h2>
+        <p class="animate-text delay-1" style="text-align: center; max-width: 700px; margin-left: auto; margin-right: auto;">{{BODY}}</p>
+        <div class="comparison-columns animate-text delay-2">
+{{COLUMNS}}
+        </div>
+    </div>
+    <div class="background-element"></div>
+</section>
+<!-- END LAYOUT: comparison -->
+
+<!-- LAYOUT: credits -->
+<section class="scroll-section" id="section-{{N}}" data-theme="{{THEME}}">
+    <div class="content-wrapper">
+        <h2 class="animate-text">{{HEADING}}</h2>
+        <div class="links-container animate-text delay-1">
+            <p><strong>Authors:</strong> {{AUTHORS}}</p>
+            <p>{{AFFILIATIONS}}</p>
+            <a href="{{DOI_URL}}" class="btn-link" target="_blank">Read Original Publication</a>
+        </div>
+    </div>
+    <div class="background-element"></div>
+</section>
+<!-- END LAYOUT: credits -->

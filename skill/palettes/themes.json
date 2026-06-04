@@ -1,0 +1,253 @@
+{
+  "modes": {
+    "dark": {
+      "text_primary":      "#ffffff",
+      "text_secondary":    "#a0a0a0",
+      "subtitle_color":    "#cfcfcf",
+      "overlay_soft":      "rgba(255, 255, 255, 0.08)",
+      "overlay_med":       "rgba(255, 255, 255, 0.10)",
+      "overlay_lite":      "rgba(255, 255, 255, 0.05)",
+      "overlay_border":    "rgba(255, 255, 255, 0.20)",
+      "title_overlay_from":"rgba(0, 0, 0, 0.30)",
+      "title_overlay_to":  "rgba(0, 0, 0, 0.60)",
+      "btn_bg":            "#ffffff",
+      "btn_fg":            "#000000",
+      "noise_opacity":     "0.30",
+      "shimmer_from":      "0.20",
+      "shimmer_to":        "0.40",
+      "panel_bg":          "rgba(0, 0, 0, 0.55)",
+      "panel_border":      "rgba(255, 255, 255, 0.10)"
+    },
+    "light": {
+      "text_primary":      "#1a1a1a",
+      "text_secondary":    "#555555",
+      "subtitle_color":    "#333333",
+      "overlay_soft":      "rgba(0, 0, 0, 0.05)",
+      "overlay_med":       "rgba(0, 0, 0, 0.07)",
+      "overlay_lite":      "rgba(0, 0, 0, 0.03)",
+      "overlay_border":    "rgba(0, 0, 0, 0.12)",
+      "title_overlay_from":"rgba(255, 255, 255, 0.30)",
+      "title_overlay_to":  "rgba(255, 255, 255, 0.60)",
+      "btn_bg":            "#1a1a1a",
+      "btn_fg":            "#ffffff",
+      "noise_opacity":     "0.05",
+      "shimmer_from":      "0.02",
+      "shimmer_to":        "0.06",
+      "panel_bg":          "rgba(255, 255, 255, 0.78)",
+      "panel_border":      "rgba(0, 0, 0, 0.08)"
+    }
+  },
+  "typography": {
+    "editorial": {
+      "description": "Serif display + sans body. Newspaper / longform feel. Default.",
+      "body":      "'Inter', sans-serif",
+      "display":   "'Playfair Display', serif",
+      "fonts_url": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+    },
+    "modern": {
+      "description": "Geometric sans display + neutral sans body. Clean / product-design feel.",
+      "body":      "'Inter', sans-serif",
+      "display":   "'Space Grotesk', sans-serif",
+      "fonts_url": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;500;700&display=swap"
+    },
+    "tech": {
+      "description": "Monospace display + sans body. Engineering / lab notebook feel.",
+      "body":      "'Inter', sans-serif",
+      "display":   "'JetBrains Mono', monospace",
+      "fonts_url": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    },
+    "academic": {
+      "description": "Old-style serif display + humanist sans body. Journal / scholarly feel.",
+      "body":      "'Source Sans 3', sans-serif",
+      "display":   "'Crimson Pro', serif",
+      "fonts_url": "https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap"
+    }
+  },
+  "palettes": {
+    "warm": {
+      "description": "Heat, energy, fire, combustion. Default.",
+      "accent_warm":    "#ff6b6b",
+      "accent_cool":    "#4ecdc4",
+      "accent_caution": "#ffd93d",
+      "accent_extreme": "#ff4757",
+      "dark": {
+        "bg_title":   "#000000",
+        "bg_warm":    "#1a0f0f",
+        "bg_neutral": "#0f121a",
+        "bg_tech":    "#0f1a18",
+        "bg_data":    "#1a1a1a",
+        "bg_alert":   "#2a1212",
+        "bg_insight": "#1a150f",
+        "bg_glow_inner": "rgba(255, 100, 100, 0.10)",
+        "bg_glow_band":  "rgba(255, 200, 150, 0.15)",
+        "themes": {
+          "title":"#000000","warm":"#1a0f0f","neutral":"#0f121a","tech":"#0f1a18",
+          "data":"#1a1a1a","alert":"#2a1212","insight":"#1a150f","footer":"#000000"
+        }
+      },
+      "light": {
+        "bg_title":   "#ffffff",
+        "bg_warm":    "#fdeee5",
+        "bg_neutral": "#f3f4f8",
+        "bg_tech":    "#f1f8f5",
+        "bg_data":    "#f5f5f5",
+        "bg_alert":   "#fbe2dc",
+        "bg_insight": "#fcf2e6",
+        "bg_glow_inner": "rgba(255, 100, 100, 0.04)",
+        "bg_glow_band":  "rgba(255, 200, 150, 0.06)",
+        "themes": {
+          "title":"#ffffff","warm":"#fdeee5","neutral":"#f3f4f8","tech":"#f1f8f5",
+          "data":"#f5f5f5","alert":"#fbe2dc","insight":"#fcf2e6","footer":"#ffffff"
+        }
+      }
+    },
+    "cool": {
+      "description": "Water, climate, ocean, atmospheric.",
+      "accent_warm":    "#4ecdc4",
+      "accent_cool":    "#95e1d3",
+      "accent_caution": "#ffd93d",
+      "accent_extreme": "#1ca5b8",
+      "dark": {
+        "bg_title":   "#000000",
+        "bg_warm":    "#0a1418",
+        "bg_neutral": "#0f1a1f",
+        "bg_tech":    "#0a1a1f",
+        "bg_data":    "#121a1f",
+        "bg_alert":   "#0d2230",
+        "bg_insight": "#0a1820",
+        "bg_glow_inner": "rgba(78, 205, 196, 0.10)",
+        "bg_glow_band":  "rgba(149, 225, 211, 0.12)",
+        "themes": {
+          "title":"#000000","warm":"#0a1418","neutral":"#0f1a1f","tech":"#0a1a1f",
+          "data":"#121a1f","alert":"#0d2230","insight":"#0a1820","footer":"#000000"
+        }
+      },
+      "light": {
+        "bg_title":   "#ffffff",
+        "bg_warm":    "#ecf7f7",
+        "bg_neutral": "#eaf3f4",
+        "bg_tech":    "#e8f3f4",
+        "bg_data":    "#eef3f4",
+        "bg_alert":   "#e1eff3",
+        "bg_insight": "#e8f4f6",
+        "bg_glow_inner": "rgba(78, 205, 196, 0.04)",
+        "bg_glow_band":  "rgba(149, 225, 211, 0.05)",
+        "themes": {
+          "title":"#ffffff","warm":"#ecf7f7","neutral":"#eaf3f4","tech":"#e8f3f4",
+          "data":"#eef3f4","alert":"#e1eff3","insight":"#e8f4f6","footer":"#ffffff"
+        }
+      }
+    },
+    "earth": {
+      "description": "Biology, ecology, agriculture, plants, soil.",
+      "accent_warm":    "#8bc34a",
+      "accent_cool":    "#cddc39",
+      "accent_caution": "#ffd93d",
+      "accent_extreme": "#558b2f",
+      "dark": {
+        "bg_title":   "#000000",
+        "bg_warm":    "#121a0f",
+        "bg_neutral": "#0f1a12",
+        "bg_tech":    "#0f1a14",
+        "bg_data":    "#151a12",
+        "bg_alert":   "#1d2a12",
+        "bg_insight": "#1a1a0f",
+        "bg_glow_inner": "rgba(139, 195, 74, 0.10)",
+        "bg_glow_band":  "rgba(205, 220, 57, 0.10)",
+        "themes": {
+          "title":"#000000","warm":"#121a0f","neutral":"#0f1a12","tech":"#0f1a14",
+          "data":"#151a12","alert":"#1d2a12","insight":"#1a1a0f","footer":"#000000"
+        }
+      },
+      "light": {
+        "bg_title":   "#ffffff",
+        "bg_warm":    "#f1f7e6",
+        "bg_neutral": "#eef5e8",
+        "bg_tech":    "#eef5e9",
+        "bg_data":    "#f0f4e8",
+        "bg_alert":   "#e8f1d6",
+        "bg_insight": "#f5f5e1",
+        "bg_glow_inner": "rgba(139, 195, 74, 0.04)",
+        "bg_glow_band":  "rgba(205, 220, 57, 0.05)",
+        "themes": {
+          "title":"#ffffff","warm":"#f1f7e6","neutral":"#eef5e8","tech":"#eef5e9",
+          "data":"#f0f4e8","alert":"#e8f1d6","insight":"#f5f5e1","footer":"#ffffff"
+        }
+      }
+    },
+    "clinical": {
+      "description": "Medicine, clinical, health, disease, patient.",
+      "accent_warm":    "#5dade2",
+      "accent_cool":    "#7fd1ec",
+      "accent_caution": "#f5b041",
+      "accent_extreme": "#e74c3c",
+      "dark": {
+        "bg_title":   "#000000",
+        "bg_warm":    "#0f1518",
+        "bg_neutral": "#0d1418",
+        "bg_tech":    "#0f181a",
+        "bg_data":    "#12181a",
+        "bg_alert":   "#1a1212",
+        "bg_insight": "#0f1820",
+        "bg_glow_inner": "rgba(93, 173, 226, 0.10)",
+        "bg_glow_band":  "rgba(231, 76, 60, 0.10)",
+        "themes": {
+          "title":"#000000","warm":"#0f1518","neutral":"#0d1418","tech":"#0f181a",
+          "data":"#12181a","alert":"#1a1212","insight":"#0f1820","footer":"#000000"
+        }
+      },
+      "light": {
+        "bg_title":   "#ffffff",
+        "bg_warm":    "#eef4f8",
+        "bg_neutral": "#ecf2f6",
+        "bg_tech":    "#ecf3f6",
+        "bg_data":    "#eef2f5",
+        "bg_alert":   "#fbe6e0",
+        "bg_insight": "#ebf3fa",
+        "bg_glow_inner": "rgba(93, 173, 226, 0.04)",
+        "bg_glow_band":  "rgba(231, 76, 60, 0.04)",
+        "themes": {
+          "title":"#ffffff","warm":"#eef4f8","neutral":"#ecf2f6","tech":"#ecf3f6",
+          "data":"#eef2f5","alert":"#fbe6e0","insight":"#ebf3fa","footer":"#ffffff"
+        }
+      }
+    },
+    "tech": {
+      "description": "Computing, AI, machine learning, software, robotics.",
+      "accent_warm":    "#b388ff",
+      "accent_cool":    "#00e5ff",
+      "accent_caution": "#ffd93d",
+      "accent_extreme": "#ff4081",
+      "dark": {
+        "bg_title":   "#000000",
+        "bg_warm":    "#0f0f1a",
+        "bg_neutral": "#0d0d18",
+        "bg_tech":    "#0f0f20",
+        "bg_data":    "#12121a",
+        "bg_alert":   "#1a0f20",
+        "bg_insight": "#0f121a",
+        "bg_glow_inner": "rgba(179, 136, 255, 0.10)",
+        "bg_glow_band":  "rgba(0, 229, 255, 0.10)",
+        "themes": {
+          "title":"#000000","warm":"#0f0f1a","neutral":"#0d0d18","tech":"#0f0f20",
+          "data":"#12121a","alert":"#1a0f20","insight":"#0f121a","footer":"#000000"
+        }
+      },
+      "light": {
+        "bg_title":   "#ffffff",
+        "bg_warm":    "#f1ecfb",
+        "bg_neutral": "#eee9f7",
+        "bg_tech":    "#ececf9",
+        "bg_data":    "#eff0f6",
+        "bg_alert":   "#f4e6f9",
+        "bg_insight": "#eef0f8",
+        "bg_glow_inner": "rgba(179, 136, 255, 0.05)",
+        "bg_glow_band":  "rgba(0, 229, 255, 0.05)",
+        "themes": {
+          "title":"#ffffff","warm":"#f1ecfb","neutral":"#eee9f7","tech":"#ececf9",
+          "data":"#eff0f6","alert":"#f4e6f9","insight":"#eef0f8","footer":"#ffffff"
+        }
+      }
+    }
+  }
+}

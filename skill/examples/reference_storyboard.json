@@ -1,0 +1,92 @@
+{
+  "page_title": "Heat stress dichotomy",
+  "doi_url": "https://royalsocietypublishing.org/doi/full/10.1098/rsta.2024.0567",
+  "sections": [
+    {
+      "slot": "title",
+      "layout": "title",
+      "theme": "title",
+      "heading": "The Heat is On... Inside",
+      "subtitle": "Why your energy-efficient home might be cooking you this summer.<br>A deep dive into 'Indoor Mini-Heatwaves' in Southwark, London."
+    },
+    {
+      "slot": "hook",
+      "layout": "split",
+      "theme": "warm",
+      "heading": "The Rising Heat",
+      "body": "We all know the UK is getting hotter. Global temperatures are rising, and the UK is seeing record-breaking summers and more frequent climate extremes.",
+      "figure": "figure1.png",
+      "figure_alt": "Climate Extreme Graph",
+      "image_class": "content-plot"
+    },
+    {
+      "slot": "problem",
+      "layout": "split",
+      "theme": "warm",
+      "heading": "The Blind Spot",
+      "body": "Currently, a heatwave is officially defined by outdoor weather stations (28°C for 3 days in London). But we don't live at weather stations; we live indoors, where buildings create their own unique weather.",
+      "figure": "figure2.png",
+      "figure_alt": "Outdoor Heatwave Definition",
+      "image_class": "content-image"
+    },
+    {
+      "slot": "method",
+      "layout": "split",
+      "theme": "neutral",
+      "heading": "Our Approach",
+      "body": "To solve this problem, we put environmental sensors in 40 houses in Southwark London, during the hottest summer on record in 2023.<br><br>These weren't just thermometers — they measured minute-by-minute temperature, humidity and comfort levels to catch rapid changes that standard weather reports miss.",
+      "figure": "figure3.png",
+      "figure_alt": "Map of sensor locations in Southwark London",
+      "image_class": "content-image"
+    },
+    {
+      "slot": "keyFinding",
+      "layout": "impact",
+      "theme": "tech",
+      "heading": "Introducing the 'Indoor Mini-Heatwave'",
+      "definition": "“An indoor mini-heatwave is a short, sharp spike in temperature exceeding the safe indoor threshold of 26°C.”",
+      "big_number_a": "2",
+      "stat_desc_a": "Outdoor Heatwaves",
+      "big_number_b": "5.35",
+      "stat_desc_b": "Indoor Mini-Heatwaves (Avg)",
+      "caption": "During the study period."
+    },
+    {
+      "slot": "dataNarrative",
+      "layout": "split",
+      "theme": "data",
+      "heading": "Escaping the Comfort Zone",
+      "body": "During the study, researchers tracked thousands of minutes of indoor climate data. The blue box represents where humans feel comfortable. The red dots show where residents actually lived during the heatwave — pushed far into dangerous levels of heat and humidity.",
+      "insight": "<strong>Key Insight:</strong> Nearly half of the time spent indoors during heatwaves was outside the safe zone, pushing into 'Caution' and 'Extreme Caution' levels.",
+      "figure": "figure4.png",
+      "figure_alt": "Psychrometric chart showing comfort gap",
+      "image_class": "content-plot"
+    },
+    {
+      "slot": "secondaryFinding",
+      "layout": "split",
+      "theme": "alert",
+      "heading": "The Nighttime Lag",
+      "body": "The heat doesn't sleep when you do. While mini-heatwaves often start around 3:00 PM, many persist late into the night. Buildings act like batteries, storing heat during the day and releasing it after sunset, disrupting sleep.",
+      "figure": "figure5.png",
+      "figure_alt": "Indoor vs Outdoor Temperature Lag Effect",
+      "image_class": "content-plot"
+    },
+    {
+      "slot": "insight",
+      "layout": "insight",
+      "theme": "insight",
+      "heading": "The Efficiency Paradox",
+      "body": "The study found that homes in good condition and with better Energy Performance Certificate (EPC) ratings actually got hotter. Modern efficiency traps heat inside during summer.",
+      "cta": "We need to redesign homes for passive cooling (shading, ventilation) and redefine 'heatwaves' to include indoor risks."
+    },
+    {
+      "slot": "credits",
+      "layout": "credits",
+      "theme": "footer",
+      "heading": "Publication & Team",
+      "authors": "Maoran Sun<sup>1</sup>, Jiayu Pan<sup>1</sup>, Qunshan Zhao<sup>2</sup>, Ronita Bardhan<sup>1</sup>",
+      "affiliations": "<sup>1</sup> Sustainable Design Group, University of Cambridge &nbsp;&nbsp; <sup>2</sup> Urban Big Data Center, University of Glasgow"
+    }
+  ]
+}

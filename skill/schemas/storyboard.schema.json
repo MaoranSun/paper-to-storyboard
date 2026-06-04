@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Paper Storyboard",
+  "type": "object",
+  "required": ["page_title", "sections"],
+  "properties": {
+    "page_title": {"type": "string", "description": "<title> tag content"},
+    "doi_url":    {"type": "string"},
+    "sections": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 9,
+      "items": {
+        "type": "object",
+        "required": ["slot", "layout", "theme", "heading"],
+        "properties": {
+          "slot": {
+            "type": "string",
+            "enum": ["title", "hook", "problem", "method", "keyFinding", "dataNarrative", "secondaryFinding", "insight", "credits"]
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "title",
+              "split", "split_reverse", "split_no_image",
+              "stacked",
+              "fullbleed",
+              "quote",
+              "impact", "impact_single", "stats_grid",
+              "comparison",
+              "insight",
+              "credits"
+            ]
+          },
+          "theme": {
+            "type": "string",
+            "enum": ["title", "warm", "neutral", "tech", "data", "alert", "insight", "footer"]
+          },
+          "heading":   {"type": "string"},
+          "subtitle":  {"type": "string"},
+          "cover_image":{"type": "string", "description": "Filename of AI-generated cover image for the title slot. Optional. If absent or file missing, falls back to gradient-only title-bg."},
+          "body":      {"type": "string"},
+          "figure":    {"type": "string", "description": "Filename (relative to out_dir) of the figure to embed"},
+          "figure_alt":{"type": "string"},
+          "image_class":{"type": "string", "enum": ["content-image", "content-plot"], "default": "content-image"},
+          "insight":   {"type": "string", "description": "Optional key-insight callout body for split layouts"},
+          "definition":{"type": "string"},
+          "big_number_a":{"type": "string"},
+          "stat_desc_a":{"type": "string"},
+          "big_number_b":{"type": "string"},
+          "stat_desc_b":{"type": "string"},
+          "caption":   {"type": "string"},
+          "cta":       {"type": "string"},
+          "authors":   {"type": "string"},
+          "affiliations":{"type": "string"},
+          "quote":     {"type": "string", "description": "Pull-quote body for quote layout"},
+          "attribution":{"type": "string", "description": "Pull-quote source"},
+          "stat_items":{
+            "type": "array",
+            "description": "For stats_grid layout: 3-4 cards",
+            "items": {
+              "type": "object",
+              "properties": {
+                "number": {"type": "string"},
+                "label":  {"type": "string"},
+                "accent": {"type": "string", "enum": ["", "warm", "cool", "caution", "extreme"]}
+              }
+            }
+          },
+          "columns": {
+            "type": "array",
+            "description": "For comparison layout: 2-3 text columns",
+            "items": {
+              "type": "object",
+              "properties": {
+                "heading": {"type": "string"},
+                "body":    {"type": "string"},
+                "accent":  {"type": "string", "enum": ["", "warm", "cool", "caution", "extreme"]}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
