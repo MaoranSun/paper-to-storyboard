@@ -7,6 +7,8 @@ description: Convert an academic PDF paper into a single-page scrollytelling web
 
 Turn an academic paper PDF into a dark, scroll-snap, single-page website with the same chassis as the reference example. The chassis (HTML scaffold, CSS layout/animations, vanilla JS IntersectionObserver) is fixed. Only the color palette and per-section content change per paper.
 
+> **Run this skill on a strong model (Opus).** The hard part isn't the scripts — it's the judgement: mapping a paper onto the 9-slot narrative arc, rewriting body copy to fit display type, picking layouts and a palette, and composing the cover concept. Weaker models (e.g. Sonnet) tend to produce flat narratives, mis-assigned layouts, and verbatim-dumped paragraphs. If you're not on Opus, tell the user to switch with `/model opus` before invoking.
+
 ## Inputs
 
 - `pdf_path` (required, absolute path)
