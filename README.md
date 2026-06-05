@@ -2,6 +2,10 @@
 
 A [Claude Code](https://claude.com/claude-code) skill that turns an academic paper PDF into a single-page scroll-snap website — a "storyboard" of the paper's argument, with extracted figures, a generated cover image, and a fixed editorial chassis you can re-skin per paper.
 
+![Title slot of the SCS example — Sun & Bardhan 2024, rendered with cool / light / modern style](examples/SCS_storyboard/screenshot.png)
+
+*Above: title slot of [`examples/SCS_storyboard/`](examples/SCS_storyboard/) — Sun & Bardhan 2024 "Identifying Hard-to-Decarbonize houses", rendered with `cool / light / modern` and an AI-generated cover.*
+
 ```
 academic PDF  ─►  content.json + figureN.png  ─►  Claude composes storyboard.json  ─►  index.html + style.css + script.js
 ```
