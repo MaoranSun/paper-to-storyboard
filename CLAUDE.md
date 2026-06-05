@@ -2,6 +2,8 @@
 
 This repo *is* the source of the `paper-to-storyboard` Claude Code Skill. The skill turns an academic PDF into a dark scroll-snap webpage (HTML + CSS + vanilla JS + transparent figures + AI cover).
 
+**Origin:** https://github.com/MaoranSun/paper-to-storyboard (public, MIT). Always confirm `git remote -v` matches this before pushing — a divergent fork would be a sign the working tree was cloned elsewhere.
+
 ## Layout
 
 ```
@@ -14,7 +16,16 @@ paper-to-storyboard/        (this repo — the canonical source of truth)
 │   ├── schemas/storyboard.schema.json
 │   └── examples/reference_storyboard.json
 ├── examples/               # rendered storyboards (one self-contained dir per paper)
-│   └── <paper-shortname>/  # index.html, style.css, script.js, figures, cover
+│   ├── README.md           # per-example layout convention + how to render/preview
+│   └── SCS_storyboard/     # Sun & Bardhan 2024 (cool / light / modern)
+│       ├── README.md       # paper citation + style combo + view instructions
+│       ├── index.html      # rendered chassis
+│       ├── style.css
+│       ├── script.js
+│       ├── storyboard.json # editable narrative — re-render after edits
+│       ├── cover.png       # AI-generated title cover
+│       ├── figureN.png     # transparent figures lifted from the paper
+│       └── screenshot.png  # README hero image (1800px max, ~2 MB)
 ├── install.sh              # copies ./skill/ → ~/.claude/skills/paper-to-storyboard/
 ├── requirements.txt
 ├── README.md               # public-facing
@@ -22,7 +33,7 @@ paper-to-storyboard/        (this repo — the canonical source of truth)
 └── CLAUDE.md               # this file
 ```
 
-**Edits to the skill should be made in `./skill/` in this repo, then re-installed** via `./install.sh` (or use `./install.sh --symlink` once so edits go live without re-running). Do not edit `~/.claude/skills/paper-to-storyboard/` directly — that's the install target.
+**The installed skill at `~/.claude/skills/paper-to-storyboard/` is a SYMLINK to `./skill/` in this repo.** ⚠️ Always edit `./skill/` here. Edits made through the symlinked path technically work (they hit the same files), but if a future contributor reinstalls with `./install.sh` (copy mode) the symlink turns into a real directory and edits diverge silently. Verify with `ls -la ~/.claude/skills/paper-to-storyboard` — you should see `-> /Users/maoransun/GitHub/paper-to-storyboard/skill`. If it isn't a symlink, run `./install.sh --symlink` once to restore.
 
 ## What the skill produces
 
@@ -82,6 +93,20 @@ pip install -r requirements.txt
 # openai (optional, for cover generation)
 # rembg (optional, for complex-figure bg removal)
 ```
+
+## Adding an example to `examples/`
+
+When the skill produces an output dir you want to publish, here's the cleanup recipe (we used it for `SCS_storyboard/`):
+
+1. **Trim raw extraction artifacts.** Delete `content.json` and `figures/` from the output dir — they're for the pipeline, not the reader. Cuts size ~50%.
+   ```bash
+   rm -rf <out>/content.json <out>/figures
+   ```
+2. **Move into `examples/`** as `examples/<paper-shortname>_storyboard/`. The `.gitignore` has an `!examples/*_storyboard/` exception so the dir won't be silently excluded by the demo-output rule.
+3. **Write a per-example `README.md`** with the paper citation, style combo (palette / mode / typography), layouts used, and a "View it" command (`python3 skill/scripts/preview.py examples/<name> 8765`).
+4. **Capture a screenshot** — open via `preview.py` (not directly, so the cover image and fonts load), screenshot the title slot at ~1600×1000, save as `examples/<name>/screenshot.png`, downscale: `sips -Z 1800 examples/<name>/screenshot.png --out examples/<name>/screenshot.png` (keeps under ~2 MB).
+5. **Add the screenshot to the repo's top-level `README.md`** as the hero image (only for the first/canonical example; later examples don't need to appear at the top).
+6. `git add examples/<name>/ && git commit && git push`. The `.gitignore` exception will already pick up the new subdir.
 
 ## Methods evaluated (and why we kept what we kept)
 
