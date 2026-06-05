@@ -112,6 +112,12 @@ paper-to-storyboard/
 └── README.md
 ```
 
+## Known limitations
+
+- **Figure background removal is imperfect.** `make_transparent.py` uses corner flood-fill, which works well on plot figures with clean near-white backgrounds but can leave visible halos around anti-aliased lines, text edges, or in figures with non-uniform / textured backgrounds (gradients, photographs, dark plots). For these cases you'll likely want to manually clean up the figure in an external editor (Photoshop, GIMP, Affinity, `magick`, etc.) and drop the corrected `figureN.png` back into the output directory before re-running `render.py`. We evaluated `rembg` (u2net, isnet, birefnet-general) and OpenAI `gpt-image-1` image-edit as alternatives — see [`CLAUDE.md`](CLAUDE.md) for why flood-fill stayed the default despite the rough edges.
+- **Text/figure extraction is brittle on multi-column journal layouts.** `pdfplumber`'s section heuristics sometimes fuse running headers or fragment columns; expect to inspect `content.json` before mapping. Embedded figures usually extract cleanly via PyMuPDF; rasterized-vector composites occasionally need a page-region crop fallback.
+- **AI cover images can ignore palette/mode hints.** `gpt-image-1` interprets the concept loosely; if the cover doesn't fit your section's lighting, regenerate with a more constrained prompt or skip the cover entirely (the title slot has a gradient fallback).
+
 ## Conventions
 
 - **The chassis is fixed.** Per-paper variation is restricted to palette + mode + typography + per-section content + cover image. Never regenerate the HTML/CSS/JS freeform; always go through `render.py`.
