@@ -25,6 +25,7 @@ env/
 out/
 storyboard/
 *_storyboard/
+!examples/*_storyboard/
 
 # Local-only reference example (kept on disk, not published)
 reference/

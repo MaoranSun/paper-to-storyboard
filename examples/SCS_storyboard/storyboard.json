@@ -1,0 +1,102 @@
+{
+  "page_title": "Identifying Hard-to-Decarbonize Houses",
+  "doi_url": "https://doi.org/10.1016/j.scs.2023.105015",
+  "sections": [
+    {
+      "slot": "title",
+      "layout": "title",
+      "theme": "title",
+      "heading": "Finding the Homes the Grid Forgot",
+      "subtitle": "Using street view, aerial imagery and deep learning to identify Hard-to-Decarbonize houses<br>across Cambridge, UK.",
+      "cover_image": "cover.png"
+    },
+    {
+      "slot": "hook",
+      "layout": "split",
+      "theme": "warm",
+      "heading": "Five Billion New City Dwellers",
+      "body": "By 2050, 80% of us will live in cities. Reaching net zero means decarbonizing the homes we already have — but the hardest-to-decarbonize quarter of them have been largely ignored.",
+      "figure": "figure4.png",
+      "figure_alt": "Random samples of street view and aerial view images from the Cambridge dataset",
+      "image_class": "content-image"
+    },
+    {
+      "slot": "problem",
+      "layout": "split_reverse",
+      "theme": "warm",
+      "heading": "The Blind Spot in Net Zero",
+      "body": "“Hard-to-Decarbonize” (HtD) houses are estimated to be a quarter of all homes globally — older, narrow-cavity, off-gas, single-glazed. Policy exists; identification doesn't. Without knowing where these homes are, retrofit money goes everywhere except where it is needed most.",
+      "figure": "figure3.png",
+      "figure_alt": "Methodology overview: HtD identification, model training, model interpretation",
+      "image_class": "content-image"
+    },
+    {
+      "slot": "method",
+      "layout": "split",
+      "theme": "neutral",
+      "heading": "Four Data Sources, One Verdict",
+      "body": "We fuse four publicly available data sources into a single deep learning model: street view images (what a passer-by sees), aerial view images (the roofs and footprints), land surface temperature (where heat leaks), and basic building stock attributes (age, area). Each branch contributes its own signal; the network learns how to combine them.",
+      "figure": "figure5.png",
+      "figure_alt": "Three-branch model architecture combining SVI, AVI and tabular features",
+      "image_class": "content-plot"
+    },
+    {
+      "slot": "keyFinding",
+      "layout": "stats_grid",
+      "theme": "tech",
+      "heading": "How Each Data Source Performs",
+      "body": "Overall precision on 1,335 Cambridge houses — single-source ablation versus the full four-branch model.",
+      "stat_items": [
+        {"number": "78.5%", "label": "Street View only",      "accent": "cool"},
+        {"number": "76.9%", "label": "Aerial View only",      "accent": "cool"},
+        {"number": "62.3%", "label": "Tabular only (LST+BS)", "accent": "caution"},
+        {"number": "82%",   "label": "All four combined",     "accent": "extreme"}
+      ]
+    },
+    {
+      "slot": "dataNarrative",
+      "layout": "split",
+      "theme": "data",
+      "heading": "What the Model Looks At",
+      "body": "Class Activation Maps reveal where the model focuses its attention. Across the dataset, it consistently picks out roofs, chimneys, windows and facade materials — the same architectural cues a building surveyor would use. It ignores the pavement, the cars and the trees.",
+      "insight": "<strong>Key Insight:</strong> The model isn't memorizing pixels — it learned to read buildings. That's why the same approach should travel beyond Cambridge.",
+      "figure": "figure7.png",
+      "figure_alt": "Class Activation Map overlays on street view images, red = high contribution",
+      "image_class": "content-plot"
+    },
+    {
+      "slot": "secondaryFinding",
+      "layout": "comparison",
+      "theme": "alert",
+      "heading": "Two Lenses on the Same House",
+      "body": "Each data source picks up different architectural cues. The model's Class Activation Maps reveal what it actually looks at.",
+      "columns": [
+        {
+          "heading": "Street View",
+          "body": "Picks out windows, chimneys, facade material and ground-floor frontage — the same cues a surveyor would use during a doorstep visit.",
+          "accent": "cool"
+        },
+        {
+          "heading": "Aerial View",
+          "body": "Reads roof geometry, footprint and surroundings. Less rich than street view, but covers most of the globe — a credible first map for data-poor regions.",
+          "accent": "extreme"
+        }
+      ]
+    },
+    {
+      "slot": "insight",
+      "layout": "quote",
+      "theme": "insight",
+      "quote": "With publicly available imagery and a building register, deep learning can map a city's hardest-to-decarbonize homes — at building-level resolution, without door-to-door surveys.",
+      "attribution": "Sun & Bardhan, 2024"
+    },
+    {
+      "slot": "credits",
+      "layout": "credits",
+      "theme": "footer",
+      "heading": "Publication & Team",
+      "authors": "Maoran Sun, Ronita Bardhan",
+      "affiliations": "Department of Architecture, University of Cambridge &nbsp;·&nbsp; Sustainable Cities and Society 100 (2024) 105015"
+    }
+  ]
+}

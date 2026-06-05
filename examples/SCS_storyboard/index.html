@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identifying Hard-to-Decarbonize Houses</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="story-container">
+        <section class="scroll-section" id="section-0" data-theme="title">
+            <div class="content-wrapper">
+                <h1 class="animate-text" style="font-size: 4rem; line-height: 1.1;">Finding the Homes the Grid Forgot</h1>
+                <p class="animate-text delay-1 title-subtitle">Using street view, aerial imagery and deep learning to identify Hard-to-Decarbonize houses<br>across Cambridge, UK.</p>
+            </div>
+            <div class="background-element title-bg has-cover" style="background-image: linear-gradient(var(--title-overlay-from), var(--title-overlay-to)), url('cover.png'); background-size: cover; background-position: center;"></div>
+        </section>
+        <section class="scroll-section" id="section-1" data-theme="warm">
+            <div class="content-wrapper split-layout">
+                <div class="text-content">
+                    <h2 class="animate-text">Five Billion New City Dwellers</h2>
+                    <p class="animate-text delay-1">By 2050, 80% of us will live in cities. Reaching net zero means decarbonizing the homes we already have — but the hardest-to-decarbonize quarter of them have been largely ignored.</p>
+                    
+                </div>
+                <div class="image-content animate-text delay-3">
+                    <img src="figure4.png" alt="Random samples of street view and aerial view images from the Cambridge dataset" class="content-image">
+                </div>
+            </div>
+            <div class="background-element"></div>
+        </section>
+        <section class="scroll-section" id="section-2" data-theme="warm">
+            <div class="content-wrapper split-layout reverse">
+                <div class="image-content animate-text delay-1">
+                    <img src="figure3.png" alt="Methodology overview: HtD identification, model training, model interpretation" class="content-image">
+                </div>
+                <div class="text-content">
+                    <h2 class="animate-text">The Blind Spot in Net Zero</h2>
+                    <p class="animate-text delay-2">“Hard-to-Decarbonize” (HtD) houses are estimated to be a quarter of all homes globally — older, narrow-cavity, off-gas, single-glazed. Policy exists; identification doesn't. Without knowing where these homes are, retrofit money goes everywhere except where it is needed most.</p>
+                    
+                </div>
+            </div>
+            <div class="background-element"></div>
+        </section>
+        <section class="scroll-section" id="section-3" data-theme="neutral">
+            <div class="content-wrapper split-layout">
+                <div class="text-content">
+                    <h2 class="animate-text">Four Data Sources, One Verdict</h2>
+                    <p class="animate-text delay-1">We fuse four publicly available data sources into a single deep learning model: street view images (what a passer-by sees), aerial view images (the roofs and footprints), land surface temperature (where heat leaks), and basic building stock attributes (age, area). Each branch contributes its own signal; the network learns how to combine them.</p>
+                    
+                </div>
+                <div class="image-content animate-text delay-3">
+                    <img src="figure5.png" alt="Three-branch model architecture combining SVI, AVI and tabular features" class="content-plot">
+                </div>
+            </div>
+            <div class="background-element"></div>
+        </section>
+        <section class="scroll-section" id="section-4" data-theme="tech">
+            <div class="content-wrapper impact-section">
+                <h2 class="animate-text">How Each Data Source Performs</h2>
+                <p class="animate-text delay-1" style="max-width: 700px; margin-left: auto; margin-right: auto;">Overall precision on 1,335 Cambridge houses — single-source ablation versus the full four-branch model.</p>
+                <div class="stats-grid animate-text delay-2">
+                    <div class="stat-item cool">
+                        <span class="stat-number">78.5%</span>
+                        <span class="stat-label">Street View only</span>
+                    </div>
+                    <div class="stat-item cool">
+                        <span class="stat-number">76.9%</span>
+                        <span class="stat-label">Aerial View only</span>
+                    </div>
+                    <div class="stat-item caution">
+                        <span class="stat-number">62.3%</span>
+                        <span class="stat-label">Tabular only (LST+BS)</span>
+                    </div>
+                    <div class="stat-item extreme">
+                        <span class="stat-number">82%</span>
+                        <span class="stat-label">All four combined</span>
+                    </div>
+                </div>
+            </div>
+            <div class="background-element"></div>
+        </section>
+        <section class="scroll-section" id="section-5" data-theme="data">
+            <div class="content-wrapper split-layout">
+                <div class="text-content">
+                    <h2 class="animate-text">What the Model Looks At</h2>
+                    <p class="animate-text delay-1">Class Activation Maps reveal where the model focuses its attention. Across the dataset, it consistently picks out roofs, chimneys, windows and facade materials — the same architectural cues a building surveyor would use. It ignores the pavement, the cars and the trees.</p>
+                    <div class="key-insight animate-text delay-2"><strong>Key Insight:</strong> The model isn't memorizing pixels — it learned to read buildings. That's why the same approach should travel beyond Cambridge.</div>
+                </div>
+                <div class="image-content animate-text delay-3">
+                    <img src="figure7.png" alt="Class Activation Map overlays on street view images, red = high contribution" class="content-plot">
+                </div>
+            </div>
+            <div class="background-element"></div>
+        </section>
+        <section class="scroll-section" id="section-6" data-theme="alert">
+            <div class="content-wrapper">
+                <h2 class="animate-text" style="text-align: center;">Two Lenses on the Same House</h2>
+                <p class="animate-text delay-1" style="text-align: center; max-width: 700px; margin-left: auto; margin-right: auto;">Each data source picks up different architectural cues. The model's Class Activation Maps reveal what it actually looks at.</p>
+                <div class="comparison-columns animate-text delay-2">
+                    <div class="comparison-column cool">
+                        <h3>Street View</h3>
+                        <p>Picks out windows, chimneys, facade material and ground-floor frontage — the same cues a surveyor would use during a doorstep visit.</p>
+                    </div>
+                    <div class="comparison-column extreme">
+                        <h3>Aerial View</h3>
+                        <p>Reads roof geometry, footprint and surroundings. Less rich than street view, but covers most of the globe — a credible first map for data-poor regions.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="background-element"></div>
+        </section>
+        <section class="scroll-section" id="section-7" data-theme="insight">
+            <div class="content-wrapper quote-layout">
+                <blockquote class="pull-quote animate-text">With publicly available imagery and a building register, deep learning can map a city's hardest-to-decarbonize homes — at building-level resolution, without door-to-door surveys.</blockquote>
+                <p class="pull-attribution animate-text delay-1">Sun & Bardhan, 2024</p>
+            </div>
+            <div class="background-element"></div>
+        </section>
+        <section class="scroll-section" id="section-8" data-theme="footer">
+            <div class="content-wrapper">
+                <h2 class="animate-text">Publication & Team</h2>
+                <div class="links-container animate-text delay-1">
+                    <p><strong>Authors:</strong> Maoran Sun, Ronita Bardhan</p>
+                    <p>Department of Architecture, University of Cambridge &nbsp;·&nbsp; Sustainable Cities and Society 100 (2024) 105015</p>
+                    <a href="https://doi.org/10.1016/j.scs.2023.105015" class="btn-link" target="_blank">Read Original Publication</a>
+                </div>
+            </div>
+            <div class="background-element"></div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
