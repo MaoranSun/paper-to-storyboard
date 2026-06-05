@@ -56,6 +56,8 @@ pip install -r requirements.txt
 
 Then in Claude Code: **`convert /path/to/paper.pdf to a storyboard`**.
 
+> **Run this skill on a strong model (Opus).** The hard part isn't the scripts — it's the judgement: mapping a paper onto the 9-slot narrative arc, rewriting body copy to fit display type, picking layouts and a palette, and composing the cover concept. Weaker models (e.g. Sonnet) tend to produce flat narratives, mis-assigned layouts, and verbatim-dumped paragraphs. Switch with `/model opus` before invoking.
+
 The skill's [`SKILL.md`](skill/SKILL.md) tells Claude the pipeline to run; you should rarely need to invoke scripts manually.
 
 ## Style options
