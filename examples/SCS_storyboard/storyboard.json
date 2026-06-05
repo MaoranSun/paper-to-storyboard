@@ -42,16 +42,22 @@
     },
     {
       "slot": "keyFinding",
-      "layout": "stats_grid",
+      "layout": "chart",
       "theme": "tech",
       "heading": "How Each Data Source Performs",
       "body": "Overall precision on 1,335 Cambridge houses — single-source ablation versus the full four-branch model.",
-      "stat_items": [
-        {"number": "78.5%", "label": "Street View only",      "accent": "cool"},
-        {"number": "76.9%", "label": "Aerial View only",      "accent": "cool"},
-        {"number": "62.3%", "label": "Tabular only (LST+BS)", "accent": "caution"},
-        {"number": "82%",   "label": "All four combined",     "accent": "extreme"}
-      ]
+      "chart": {
+        "type": "bar",
+        "unit": "%",
+        "y_max": 100,
+        "data_source": "text",
+        "series": [
+          {"label": "Street View only",      "value": 78.5, "accent": "cool"},
+          {"label": "Aerial View only",      "value": 76.9, "accent": "cool"},
+          {"label": "Tabular only (LST+BS)", "value": 62.3, "accent": "caution"},
+          {"label": "All four combined",     "value": 82,   "accent": "extreme"}
+        ]
+      }
     },
     {
       "slot": "dataNarrative",

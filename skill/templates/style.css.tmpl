@@ -421,6 +421,112 @@ strong {
     line-height: 1.4;
 }
 
+/* Bar chart (vanilla, no CDN). Bars grow when the section becomes .active;
+   value labels and a provenance caption fade in after. Hover/focus = exact value. */
+.bar-chart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 2.5rem;
+    height: 320px;
+    max-width: 880px;
+    margin: 3rem auto 0 auto;
+    padding: 0 1rem;
+    border-bottom: 1px solid var(--panel-border);
+}
+
+.chart-bar {
+    position: relative;
+    flex: 1 1 0;
+    max-width: 150px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    outline: none;
+}
+
+.chart-bar-track {
+    width: 100%;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: flex-end;
+    min-height: 0;
+}
+
+.chart-bar-fill {
+    position: relative;
+    width: 100%;
+    height: 0;
+    color: var(--accent-cool);
+    background: currentColor;
+    border-radius: 10px 10px 0 0;
+    transition: height 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+                filter 0.2s ease, box-shadow 0.2s ease;
+    transition-delay: 0.45s, 0s, 0s;
+}
+
+.scroll-section.active .chart-bar-fill {
+    height: var(--bar-h);
+}
+
+.chart-bar.warm    .chart-bar-fill { color: var(--accent-warm); }
+.chart-bar.cool    .chart-bar-fill { color: var(--accent-cool); }
+.chart-bar.caution .chart-bar-fill { color: var(--accent-caution); }
+.chart-bar.extreme .chart-bar-fill { color: var(--accent-extreme); }
+
+.chart-bar:hover .chart-bar-fill,
+.chart-bar:focus .chart-bar-fill {
+    filter: brightness(1.12) saturate(1.1);
+    box-shadow: 0 0 26px -2px currentColor;
+}
+
+.chart-bar-value {
+    position: absolute;
+    top: -2.1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--text-primary);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.2s ease;
+    transition-delay: 1.3s;
+}
+
+.scroll-section.active .chart-bar-value { opacity: 1; }
+
+.chart-bar:hover .chart-bar-value,
+.chart-bar:focus .chart-bar-value {
+    transform: translateX(-50%) translateY(-4px) scale(1.08);
+    transition-delay: 0s;
+}
+
+.chart-bar-label {
+    margin-top: 0.9rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+    text-align: center;
+    line-height: 1.35;
+    min-height: 2.6em;
+}
+
+.chart-provenance {
+    max-width: 700px;
+    margin: 1.4rem auto 0 auto;
+    text-align: center;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    opacity: 0.85;
+}
+
 /* Comparison columns (two text blocks side by side) */
 .comparison-columns {
     display: grid;

@@ -112,7 +112,7 @@ The schema has **9 fixed slots** (you may skip slot 6 if the paper has only one 
 | 1 — hook | `split`, `quote` | First paragraph of Introduction ("why now") |
 | 2 — problem | `split`, `split_reverse`, `quote` | The gap/limitation paragraph |
 | 3 — method | `split`, `split_reverse`, `stacked` | One-line methods + schematic figure |
-| 4 — keyFinding | `impact`, `impact_single`, `stats_grid` | Headline number(s) |
+| 4 — keyFinding | `impact`, `impact_single`, `stats_grid`, `chart` | Headline number(s) |
 | 5 — dataNarrative | `split`, `stacked` | Main results figure + body + insight callout |
 | 6 — secondaryFinding | `split_reverse`, `comparison` | Temporal/subgroup result or A-vs-B contrast (skippable) |
 | 7 — insight | `insight`, `quote` | Discussion takeaway, call-to-action or pull quote |
@@ -130,6 +130,7 @@ The schema has **9 fixed slots** (you may skip slot 6 if the paper has only one 
 - **`impact`** — two big numbers vs. each other.
 - **`impact_single`** — one big number with a caption.
 - **`stats_grid`** — 3–4 metric cards (`stat_items: [{number, label, accent}]`).
+- **`chart`** — vanilla (no-CDN) bar chart that grows on scroll and shows exact values on hover/focus. Use it instead of `stats_grid` when 2–6 numbers form a *comparison the reader should see as bars* (e.g. an ablation, before/after, per-group precision). Spec lives in a `chart` object: `{type: "bar", unit, y_max, data_source, series: [{label, value, accent}]}`. **Only `bar` is supported** — line/scatter are intentionally excluded because their values can't be recovered reliably. **`data_source` is mandatory and load-bearing**: use `"table"` or `"text"` only when the numbers are ground-truth (a data table or values quoted in the prose); use `"estimated"` if you read them off a figure by eye — that renders an "approximate, not exact" caption so the reader isn't misled. Never fabricate values to fill a chart; if you can't source the numbers, use a non-chart layout.
 - **`comparison`** — two/three side-by-side text columns (`columns: [{heading, body, accent}]`).
 - **`insight`** — discussion takeaway with a call-to-action box.
 - **`credits`** — authors + affiliations + DOI button.

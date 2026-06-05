@@ -63,24 +63,25 @@
             <div class="content-wrapper impact-section">
                 <h2 class="animate-text">How Each Data Source Performs</h2>
                 <p class="animate-text delay-1" style="max-width: 700px; margin-left: auto; margin-right: auto;">Overall precision on 1,335 Cambridge houses — single-source ablation versus the full four-branch model.</p>
-                <div class="stats-grid animate-text delay-2">
-                    <div class="stat-item cool">
-                        <span class="stat-number">78.5%</span>
-                        <span class="stat-label">Street View only</span>
+                <div class="bar-chart animate-text delay-2" role="img" aria-label="Bar chart. Street View only 78.5%; Aerial View only 76.9%; Tabular only (LST+BS) 62.3%; All four combined 82%">
+                    <div class="chart-bar cool" style="--bar-h: 78.5%" tabindex="0" aria-label="Street View only: 78.5%">
+                        <div class="chart-bar-track"><div class="chart-bar-fill"><span class="chart-bar-value">78.5%</span></div></div>
+                        <span class="chart-bar-label">Street View only</span>
                     </div>
-                    <div class="stat-item cool">
-                        <span class="stat-number">76.9%</span>
-                        <span class="stat-label">Aerial View only</span>
+                    <div class="chart-bar cool" style="--bar-h: 76.9%" tabindex="0" aria-label="Aerial View only: 76.9%">
+                        <div class="chart-bar-track"><div class="chart-bar-fill"><span class="chart-bar-value">76.9%</span></div></div>
+                        <span class="chart-bar-label">Aerial View only</span>
                     </div>
-                    <div class="stat-item caution">
-                        <span class="stat-number">62.3%</span>
-                        <span class="stat-label">Tabular only (LST+BS)</span>
+                    <div class="chart-bar caution" style="--bar-h: 62.3%" tabindex="0" aria-label="Tabular only (LST+BS): 62.3%">
+                        <div class="chart-bar-track"><div class="chart-bar-fill"><span class="chart-bar-value">62.3%</span></div></div>
+                        <span class="chart-bar-label">Tabular only (LST+BS)</span>
                     </div>
-                    <div class="stat-item extreme">
-                        <span class="stat-number">82%</span>
-                        <span class="stat-label">All four combined</span>
+                    <div class="chart-bar extreme" style="--bar-h: 82.0%" tabindex="0" aria-label="All four combined: 82%">
+                        <div class="chart-bar-track"><div class="chart-bar-fill"><span class="chart-bar-value">82%</span></div></div>
+                        <span class="chart-bar-label">All four combined</span>
                     </div>
                 </div>
+                <p class="chart-provenance animate-text delay-3">Plotted from values reported in the paper text.</p>
             </div>
             <div class="background-element"></div>
         </section>

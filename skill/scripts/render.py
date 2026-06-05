@@ -11,6 +11,7 @@ Templates live in ../templates/; presets live in ../palettes/themes.json.
 
 import argparse
 import json
+import math
 import re
 import sys
 from pathlib import Path
@@ -56,6 +57,63 @@ def _stat_items_html(items):
     return "\n".join(out)
 
 
+# Provenance captions for the chart layout, keyed by chart.data_source.
+# The whole point of the safe-slice: be explicit about where the numbers came from.
+_CHART_PROVENANCE = {
+    "table":     "Plotted from the paper&rsquo;s data table.",
+    "text":      "Plotted from values reported in the paper text.",
+    "estimated": "&#9888; Values approximated by reading the figure &mdash; indicative, not exact.",
+}
+
+
+def _fmt_num(v):
+    """82.0 -> '82', 78.5 -> '78.5'."""
+    return str(int(v)) if float(v).is_integer() else str(v)
+
+
+def _nice_ceiling(v):
+    """Smallest 'nice' axis top at or above v (with a little headroom)."""
+    if v <= 0:
+        return 1
+    target = v * 1.08
+    mag = 10 ** math.floor(math.log10(target))
+    for mult in (1, 2, 2.5, 5, 10):
+        if mult * mag >= target:
+            return mult * mag
+    return 10 * mag
+
+
+def _chart_html(chart):
+    """Return (bars_html, provenance_html, aria_label) for the chart layout."""
+    if not chart:
+        return "", "", ""
+    series = chart.get("series", [])
+    unit = chart.get("unit", "")
+    values = [float(s.get("value", 0)) for s in series]
+    y_max = chart.get("y_max") or (_nice_ceiling(max(values)) if values else 1)
+
+    bars, aria_parts = [], []
+    for s in series:
+        val = float(s.get("value", 0))
+        accent = (s.get("accent") or "").strip()
+        cls = "chart-bar" + (f" {accent}" if accent else "")
+        height = max(0.0, min(100.0, val / y_max * 100)) if y_max else 0.0
+        disp = _fmt_num(val) + unit
+        label = s.get("label", "")
+        aria_parts.append(f"{label} {disp}")
+        bars.append(
+            f'            <div class="{cls}" style="--bar-h: {height:.1f}%" '
+            f'tabindex="0" aria-label="{label}: {disp}">\n'
+            f'                <div class="chart-bar-track"><div class="chart-bar-fill">'
+            f'<span class="chart-bar-value">{disp}</span></div></div>\n'
+            f'                <span class="chart-bar-label">{label}</span>\n'
+            f'            </div>'
+        )
+    aria = "Bar chart. " + "; ".join(aria_parts)
+    provenance = _CHART_PROVENANCE.get((chart.get("data_source") or "").strip(), "")
+    return "\n".join(bars), provenance, aria
+
+
 def _columns_html(columns):
     out = []
     for i, c in enumerate(columns or []):
@@ -75,6 +133,7 @@ def render_section(snippets, section, idx, out_dir):
     if layout not in snippets:
         raise ValueError(f"Unknown layout: {layout}")
     tmpl = snippets[layout]
+    chart_bars, chart_prov, chart_aria = _chart_html(section.get("chart"))
     m = {
         "N": str(idx),
         "THEME": section.get("theme", "warm"),
@@ -94,6 +153,9 @@ def render_section(snippets, section, idx, out_dir):
         "QUOTE": section.get("quote", ""),
         "ATTRIBUTION": section.get("attribution", ""),
         "STAT_ITEMS": _stat_items_html(section.get("stat_items", [])),
+        "CHART_BARS": chart_bars,
+        "CHART_PROVENANCE": chart_prov,
+        "CHART_ARIA": chart_aria,
         "COLUMNS": _columns_html(section.get("columns", [])),
         "AUTHORS": section.get("authors", ""),
         "AFFILIATIONS": section.get("affiliations", ""),

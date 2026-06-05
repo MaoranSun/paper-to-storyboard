@@ -67,7 +67,7 @@ The skill's [`SKILL.md`](skill/SKILL.md) tells Claude the pipeline to run; you s
 | **palette** | `warm` (heat/energy) · `cool` (water/climate) · `earth` (biology/ecology) · `clinical` (medicine) · `tech` (CS/AI) |
 | **mode** | `dark` (default, animated gradient + noise) · `light` (inverted, muted) |
 | **typography** | `editorial` (Playfair + Inter) · `modern` (Space Grotesk + Inter) · `tech` (JetBrains Mono + Inter) · `academic` (Crimson Pro + Source Sans) |
-| **layouts** | `title`, `split`, `split_reverse`, `split_no_image`, `stacked`, `quote`, `impact`, `impact_single`, `stats_grid`, `comparison`, `insight`, `credits` |
+| **layouts** | `title`, `split`, `split_reverse`, `split_no_image`, `stacked`, `quote`, `impact`, `impact_single`, `stats_grid`, `chart`, `comparison`, `insight`, `credits` |
 
 Each section in `storyboard.json` declares its own `layout` and `theme`, so the same chassis can mix big-number panels, pull-quotes, two-column comparisons and side-by-side figure layouts in one page.
 

@@ -27,6 +27,7 @@
               "fullbleed",
               "quote",
               "impact", "impact_single", "stats_grid",
+              "chart",
               "comparison",
               "insight",
               "credits"
@@ -64,6 +65,35 @@
                 "number": {"type": "string"},
                 "label":  {"type": "string"},
                 "accent": {"type": "string", "enum": ["", "warm", "cool", "caution", "extreme"]}
+              }
+            }
+          },
+          "chart": {
+            "type": "object",
+            "description": "For chart layout: a vanilla scroll-grow bar chart built from RECOVERED DATA. Only use when the values are ground-truth (a data table or numbers quoted in the text). If values were eyeballed from a figure, set data_source='estimated' so the page labels them as approximate.",
+            "required": ["series", "data_source"],
+            "properties": {
+              "type": {"type": "string", "enum": ["bar"], "default": "bar", "description": "Only 'bar' is supported today (simple, reliably recoverable). Line/scatter are intentionally not supported."},
+              "unit": {"type": "string", "description": "Appended to each value, e.g. '%', '°C', 'x'. Empty for unitless."},
+              "y_max": {"type": "number", "description": "Top of the value axis. Omit to auto-pick a nice ceiling above the largest value. Set to 100 for percentages."},
+              "data_source": {
+                "type": "string",
+                "enum": ["table", "text", "estimated"],
+                "description": "Provenance of the numbers. 'table' = paper data table, 'text' = quoted in prose, 'estimated' = read off a figure by eye (renders an 'approximate' warning caption)."
+              },
+              "series": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 6,
+                "items": {
+                  "type": "object",
+                  "required": ["label", "value"],
+                  "properties": {
+                    "label": {"type": "string"},
+                    "value": {"type": "number"},
+                    "accent": {"type": "string", "enum": ["", "warm", "cool", "caution", "extreme"]}
+                  }
+                }
               }
             }
           },

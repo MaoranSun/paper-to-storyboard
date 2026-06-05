@@ -75,7 +75,7 @@ $PY $SKILL/scripts/preview.py $OUT 8765
 - **palettes**: `warm | cool | earth | clinical | tech`
 - **modes**: `dark | light` (each palette has both)
 - **typography**: `editorial` (Playfair + Inter), `modern` (Space Grotesk + Inter), `tech` (JetBrains Mono + Inter), `academic` (Crimson Pro + Source Sans)
-- **layouts**: `title`, `split`, `split_reverse`, `split_no_image`, `stacked`, `quote`, `impact`, `impact_single`, `stats_grid`, `comparison`, `insight`, `credits`. (`fullbleed` exists but is reserved for atmospheric photos — **do not use it for paper figures**.)
+- **layouts**: `title`, `split`, `split_reverse`, `split_no_image`, `stacked`, `quote`, `impact`, `impact_single`, `stats_grid`, `chart`, `comparison`, `insight`, `credits`. (`fullbleed` exists but is reserved for atmospheric photos — **do not use it for paper figures**.)
 
 ## Conventions
 
@@ -122,6 +122,21 @@ A running log of alternatives we tested and rejected, so future contributors don
 | `rembg` + `u2net` (the rembg default) | ❌ Worse | 96% partially-transparent output — entire diagram ghostly. U2Net is trained for *salient-object* segmentation (people, products); diagrams aren't objects to it. |
 | `rembg` + `birefnet-general` | ❌ Worth keeping in mind, but not default | Actually preserves content well with proper anti-aliased edges. 973 MB model download + ~5–10 s per figure. The user evaluated and chose flood-fill anyway. |
 | OpenAI `gpt-image-1` image-edit with `background="transparent"` | ❌ Unusable for scientific figures | ~$0.04 per image. Background does come out transparent, but **every text label gets garbled** ("Conv + Pool" → "Grovan PPA", "Dense Block" → "Bilesk dolk", "Output" → "Outopf"). Topology stays roughly right but specifics drift. Could be useful as an atmospheric / decorative backdrop, not for primary figure delivery. |
+
+### Recreating figures as interactive charts — kept a vanilla bar chart from ground-truth data only
+
+We explored turning paper bar/line plots into interactive charts (the original ask: "can Claude/OpenAI recreate the plots interactively?"). Conclusion: **rendering is the easy part; data provenance is the whole problem.** A chart is only as trustworthy as the numbers behind it, and this is a *real paper* — eyeballing values off a figure with a vision model risks publishing fabricated data under a real citation.
+
+What we shipped (`chart` layout, see `section_snippets.html` + `render.py` `_chart_html()`):
+
+| Decision | Choice | Why |
+|---|---|---|
+| Rendering | **Vanilla HTML/CSS bar chart, no CDN** | Keeps the "vanilla JS, no framework" chassis rule. Bars grow on scroll by reusing the existing IntersectionObserver `.active` hook — no JS added. Hover/focus reveals exact values. |
+| Chart types | **`bar` only** | Bars from a handful of discrete values are reliably recoverable. Line/scatter/dense series are not — excluded in the schema on purpose. |
+| Data source | **Ground-truth required; provenance is mandatory** | `chart.data_source` ∈ `table` \| `text` \| `estimated`. `estimated` (eyeballed) renders an "approximate, not exact" caption. We did **not** build vision-based extraction as a default path. |
+| Auto table extraction | **Not built (yet)** | `pdfplumber.extract_tables()` would feed charts from real tables without hand-authoring — the obvious next step, deliberately deferred. Charts are hand-authored from numbers already lifted into `storyboard.json` for now. |
+
+First applied to `examples/SCS_storyboard/` (the `keyFinding` ablation, `data_source: "text"`) — replaced its `stats_grid`. See `examples/SCS_storyboard/chart.png`.
 
 ### Cover image generation — kept OpenAI `gpt-image-1` (generate, not edit)
 

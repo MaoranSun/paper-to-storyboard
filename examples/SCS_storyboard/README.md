@@ -15,7 +15,11 @@ A deep learning model that fuses Street View Images (SVI), Aerial View Images (A
 
 ## Layouts used
 
-`title → split → split_reverse → split → stats_grid → split → comparison → quote → credits` — demonstrates 7 of the 11 layouts in one page.
+`title → split → split_reverse → split → chart → split → comparison → quote → credits` — demonstrates 7 of the layouts in one page.
+
+The `keyFinding` slot uses the **`chart`** layout — a vanilla (no-CDN) bar chart whose bars grow on scroll and reveal exact values on hover/focus. The four ablation precision values are lifted verbatim from the paper, so the chart carries a `"data_source": "text"` provenance caption. (Charts built from numbers eyeballed off a figure should set `"data_source": "estimated"`, which renders an "approximate, not exact" warning instead.)
+
+![The keyFinding slot rendered as an interactive bar chart](chart.png)
 
 ## View it
 
