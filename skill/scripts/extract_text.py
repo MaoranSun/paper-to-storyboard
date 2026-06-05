@@ -15,11 +15,20 @@ Emits a JSON object:
   "keywords": [str],
   "sections": [{"heading": str, "text": str, "page": int}],
   "figures_meta": [{"label": str, "caption": str, "page": int}],
-  "stats_candidates": [{"number": str, "unit": str, "context_sentence": str}]
+  "stats_candidates": [{"number": str, "unit": str, "context_sentence": str}],
+  "tables": [{
+      "label": str, "caption": str, "page": int,
+      "header": [str], "rows": [[str]],
+      "numeric_columns": [int],   # column indices that are mostly numeric
+      "chart_ready": bool         # has >=1 label column AND >=1 numeric column
+  }]
 }
 
 Section headings are detected via font-size heuristics (pdfplumber). Figure captions
 are detected by lines starting with "Figure N." or "Fig. N.". Stats use regex.
+Tables are extracted with pdfplumber's ruled-table detector (`find_tables`); the
+`chart_ready` / `numeric_columns` hints let the storyboard step build a `chart`
+layout from GROUND-TRUTH values (data_source="table") instead of eyeballing a figure.
 """
 
 import argparse
@@ -41,6 +50,9 @@ STAT_RE = re.compile(
     r"(?P<num>-?\d+(?:\.\d+)?)\s*(?P<unit>%|°C|°F|°C|°F|×|×|fold|p\s*<\s*0?\.\d+|mg|kg|km|m/s)",
     re.IGNORECASE,
 )
+TABLE_CAP_RE = re.compile(r"^\s*(Table\s*\d+[A-Za-z]?)\b\.?\s*[:.—\-]?\s*(.*)", re.IGNORECASE)
+# A cell that reads as a single number: optional comparator/sign, digits, optional %.
+NUMCELL_RE = re.compile(r"^[<>~≈±]?\s*[-+]?\d[\d,]*\.?\d*\s*%?$")
 SECTION_KEYWORDS = {
     "abstract", "introduction", "background", "methods", "method",
     "materials and methods", "results", "discussion", "conclusion",
@@ -212,6 +224,89 @@ def extract_figure_captions(pages_lines):
     return figs
 
 
+def _clean_cell(c):
+    if not c:
+        return ""
+    return re.sub(r"\s+", " ", str(c)).strip()
+
+
+def _is_numeric_cell(s):
+    return bool(NUMCELL_RE.match(s.strip())) if s else False
+
+
+def _table_captions(lines):
+    """[(label, caption, top)] for 'Table N ...' lines on one page."""
+    caps = []
+    for text, _, top in lines:
+        m = TABLE_CAP_RE.match(text)
+        if m:
+            caps.append((m.group(1).strip().rstrip("."), m.group(2).strip(), top))
+    return caps
+
+
+def extract_tables(pdf, pages_lines, max_tables=12, max_rows=40, max_cols=12):
+    """Pull ruled tables via pdfplumber.find_tables(), tag numeric columns,
+    and pair each with the nearest 'Table N' caption on its page."""
+    results = []
+    for page_idx, page in enumerate(pdf.pages):
+        caps = _table_captions(pages_lines[page_idx]) if page_idx < len(pages_lines) else []
+        try:
+            found = page.find_tables()
+        except Exception:
+            found = []
+        for t in found:
+            try:
+                raw = t.extract()
+            except Exception:
+                continue
+            rows = [[_clean_cell(c) for c in row] for row in (raw or [])]
+            rows = [r for r in rows if any(r)]  # drop fully-empty rows
+            if len(rows) < 2:
+                continue
+            ncols = min(max(len(r) for r in rows), max_cols)
+            rows = [(r + [""] * ncols)[:ncols] for r in rows][:max_rows]
+            # drop columns that are empty in every row (pdfplumber padding artifacts)
+            keep = [ci for ci in range(ncols) if any(r[ci] for r in rows)]
+            if not keep:
+                continue
+            rows = [[r[ci] for ci in keep] for r in rows]
+            ncols = len(keep)
+
+            # caption: nearest 'Table N' line to the table's top edge (within ~140pt)
+            label, caption = "", ""
+            near = [c for c in caps if abs(c[2] - t.bbox[1]) <= 140]
+            if near:
+                pick = min(near, key=lambda c: abs(c[2] - t.bbox[1]))
+                label, caption = pick[0], pick[1]
+
+            # header: first row if it's mostly non-numeric and the rest carries numbers
+            header, body = [], rows
+            if sum(_is_numeric_cell(c) for c in rows[0]) <= ncols * 0.3:
+                header, body = rows[0], rows[1:]
+            if not body:
+                continue
+
+            numeric_columns = []
+            for ci in range(ncols):
+                vals = [r[ci] for r in body if r[ci]]
+                if vals and sum(_is_numeric_cell(v) for v in vals) >= 0.6 * len(vals):
+                    numeric_columns.append(ci)
+            text_columns = [ci for ci in range(ncols) if ci not in numeric_columns]
+
+            results.append({
+                "label": label,
+                "caption": caption,
+                "page": page_idx + 1,
+                "header": header,
+                "rows": body,
+                "numeric_columns": numeric_columns,
+                "chart_ready": bool(numeric_columns) and bool(text_columns) and len(body) >= 2,
+            })
+            if len(results) >= max_tables:
+                return results
+    return results
+
+
 def extract_stats(sections):
     results = []
     seen = set()
@@ -250,6 +345,7 @@ def main():
 
     with pdfplumber.open(str(args.pdf_path)) as pdf:
         pages_lines = [cluster_lines(p) for p in pdf.pages]
+        tables = extract_tables(pdf, pages_lines)
 
     title = extract_title(pages_lines)
     sections = extract_sections(pages_lines)
@@ -270,6 +366,7 @@ def main():
         "sections": sections,
         "figures_meta": figures_meta,
         "stats_candidates": stats,
+        "tables": tables,
     }
     args.out_json.write_text(json.dumps(payload, indent=2, ensure_ascii=False))
     print(str(args.out_json.resolve()))

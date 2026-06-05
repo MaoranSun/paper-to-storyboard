@@ -41,7 +41,9 @@ Execute these steps in order. The skill directory is `~/.claude/skills/paper-to-
 python3 ~/.claude/skills/paper-to-storyboard/scripts/extract_text.py <pdf_path> <out_dir>/content.json
 ```
 
-Produces `content.json` with `{title, authors, affiliations, abstract, doi, keywords, sections[], figures_meta[], stats_candidates[]}`.
+Produces `content.json` with `{title, authors, affiliations, abstract, doi, keywords, sections[], figures_meta[], stats_candidates[], tables[]}`.
+
+`tables[]` holds ruled tables pulled by pdfplumber, each tagged with `numeric_columns` and a `chart_ready` flag (true = it has at least one label column and one numeric column). These are **ground-truth values** — prefer them as the data source for a `chart` slot (see step 6). Extraction is best-effort: it catches ruled tables well, may miss borderless ones, and can merge multi-line headers — always eyeball the `rows` before charting.
 
 ### 2. Extract figures
 
@@ -141,6 +143,7 @@ Rules for filling slots:
 - Rewrite paper prose into 1–3 short sentences per slot (paper prose is too dense for 1.2rem display type).
 - Lift headline numbers and key definitions **verbatim** from the paper.
 - For slot 4, the two big numbers should be a meaningful comparison (e.g., baseline vs treatment, outdoor vs indoor). If the paper has no natural comparison, use a single big number and one short descriptor.
+- **Charts (slot 4 alt):** if `content.json` has a `chart_ready` table whose rows form a clean 2–6 bar comparison, prefer the `chart` layout over `stats_grid`. Read the actual `rows` (don't trust the merged header blindly), pick one label column + one numeric column, and emit a `chart` object with `data_source: "table"`. If the numbers come from prose instead, use `data_source: "text"`. **Only use `data_source: "estimated"` if you read values off a figure by eye — and prefer not to: a wrong value under a real citation is worse than no chart.** Never invent values.
 - For each split-layout slot, pick a figure from `figures.json` by relevance (use the caption to judge). Same figure should not be reused across slots.
 - If the paper has fewer than 4 figures, some split-layout slots become bare (drop the image_content div).
 

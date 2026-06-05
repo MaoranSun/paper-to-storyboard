@@ -41,7 +41,7 @@ For any PDF, the pipeline emits:
 
 ```
 <out_dir>/
-├── content.json             # extracted text (sections, abstract, stats, DOI)
+├── content.json             # extracted text (sections, abstract, stats, DOI, tables)
 ├── figures/figureN.png      # raw figures + figures.json (captions, page, bbox)
 ├── figureN.png              # transparent versions
 ├── cover.png                # optional AI-generated title cover (OpenAI gpt-image-1)
@@ -134,7 +134,7 @@ What we shipped (`chart` layout, see `section_snippets.html` + `render.py` `_cha
 | Rendering | **Vanilla HTML/CSS bar chart, no CDN** | Keeps the "vanilla JS, no framework" chassis rule. Bars grow on scroll by reusing the existing IntersectionObserver `.active` hook — no JS added. Hover/focus reveals exact values. |
 | Chart types | **`bar` only** | Bars from a handful of discrete values are reliably recoverable. Line/scatter/dense series are not — excluded in the schema on purpose. |
 | Data source | **Ground-truth required; provenance is mandatory** | `chart.data_source` ∈ `table` \| `text` \| `estimated`. `estimated` (eyeballed) renders an "approximate, not exact" caption. We did **not** build vision-based extraction as a default path. |
-| Auto table extraction | **Not built (yet)** | `pdfplumber.extract_tables()` would feed charts from real tables without hand-authoring — the obvious next step, deliberately deferred. Charts are hand-authored from numbers already lifted into `storyboard.json` for now. |
+| Auto table extraction | **Built** (`extract_text.py` → `tables[]`) | `pdfplumber.find_tables()` pulls ruled tables, tags `numeric_columns`, and sets a `chart_ready` flag, so a `chart` slot can be sourced from a real table (`data_source: "table"`) instead of hand-authored. Best-effort: catches ruled tables well, may miss borderless ones, and can merge multi-line headers (the *values* survive — the storyboard step reads `rows` directly). |
 
 First applied to `examples/SCS_storyboard/` (the `keyFinding` ablation, `data_source: "text"`) — replaced its `stats_grid`. See `examples/SCS_storyboard/chart.png`.
 

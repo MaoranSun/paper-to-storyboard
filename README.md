@@ -12,7 +12,7 @@ academic PDF  ─►  content.json + figureN.png  ─►  Claude composes storyb
 
 ## What it does
 
-- Extracts the paper's text structure (sections, abstract, DOI, candidate stats) with `pdfplumber`.
+- Extracts the paper's text structure (sections, abstract, DOI, candidate stats, and ruled data tables) with `pdfplumber`. Tables tagged `chart_ready` can feed an interactive `chart` slot with ground-truth values.
 - Pulls embedded figures via PyMuPDF, falls back to page-region crops for composite figures.
 - Removes figure backgrounds (corner flood-fill, or `rembg` for photos) so they blend into the page.
 - Optionally generates a stylized data-art cover via OpenAI `gpt-image-1`.
