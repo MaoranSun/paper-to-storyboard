@@ -71,6 +71,24 @@ The skill's [`SKILL.md`](skill/SKILL.md) tells Claude the pipeline to run; you s
 
 Each section in `storyboard.json` declares its own `layout` and `theme`, so the same chassis can mix big-number panels, pull-quotes, two-column comparisons and side-by-side figure layouts in one page.
 
+## Interactive charts
+
+The `chart` layout recreates a paper's bar data as a live chart instead of pasting in a static plot image. Bars **grow on scroll** (reusing the existing `IntersectionObserver` `.active` hook — no extra JS) and **reveal exact values on hover/focus**. It's pure HTML/CSS with no CDN or charting library, consistent with the vanilla chassis.
+
+Only **bar charts** are supported. Line/scatter/dense series are excluded on purpose: their values can't be recovered reliably from a figure, and this skill renders *real papers* — fabricating numbers under a real citation is the one thing it must not do.
+
+Provenance is therefore mandatory. Every `chart` declares a `data_source`:
+
+| `data_source` | Meaning | Rendered caption |
+|---|---|---|
+| `table` | Values come from a ruled table in the paper (ground truth) | "Plotted from the paper's data table." |
+| `text` | Values quoted from the paper's prose | "Values reported in the text." |
+| `estimated` | Values eyeballed off a figure | "Approximate — read off a figure, not exact." |
+
+To make `table` sourcing trustworthy, `extract_text.py` now pulls ruled tables (`pdfplumber.find_tables()`) into a `tables[]` field in `content.json`. Each table carries its page, nearest `Table N` caption, header, data rows, `numeric_columns`, and a `chart_ready` flag (≥1 label column **and** ≥1 numeric column). A `chart_ready` table can feed a `chart` slot directly. Extraction is best-effort — ruled tables come through well; borderless ones may be missed and multi-line headers can merge, but the cell values survive.
+
+See [`examples/SCS_storyboard/`](examples/SCS_storyboard/) for a `chart` slot in context.
+
 ## Manual usage (without Claude Code)
 
 You can run the pipeline yourself:
