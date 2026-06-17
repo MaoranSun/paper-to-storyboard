@@ -231,16 +231,6 @@ strong {
     opacity: 0.5;
 }
 
-@media (max-width: 768px) {
-    .comparison-stats {
-        flex-direction: column;
-        gap: 2rem;
-    }
-    .stat-divider {
-        transform: rotate(90deg);
-    }
-}
-
 .key-insight {
     margin-top: 2rem;
     padding: 1.5rem;
@@ -276,21 +266,6 @@ strong {
 
 .split-layout.reverse {
     flex-direction: row-reverse;
-}
-
-@media (max-width: 968px) {
-    .split-layout {
-        flex-direction: column;
-        text-align: center;
-        gap: 2rem;
-    }
-    .split-layout.reverse {
-        flex-direction: column;
-    }
-    .split-layout .text-content,
-    .split-layout .image-content {
-        width: 100%;
-    }
 }
 
 /* Fullbleed: figure fills the section, text in an overlay panel */
@@ -633,8 +608,100 @@ strong {
     transform: translateY(-2px);
 }
 
+/* ============================================================
+   Mobile responsiveness
+   Sections are locked to 100vh with overflow:hidden on desktop,
+   which clips any stacked content taller than the viewport on a
+   phone. Below we let sections grow, relax scroll-snap, and scale
+   down oversized display type so nothing overflows or is cut off.
+   ============================================================ */
+
+/* Tablets and below: let tall sections breathe instead of clipping */
+@media (max-width: 968px) {
+    .story-container {
+        scroll-snap-type: y proximity;   /* relax so tall content isn't trapped */
+    }
+    .scroll-section {
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;              /* avoids mobile URL-bar jump */
+        overflow: visible;               /* don't clip stacked image+text */
+        padding: 3.5rem 1.5rem;
+    }
+    .content-image { width: 100%; }
+    .stacked-layout .image-content img { max-height: 45vh; }
+
+    /* split layouts stack into a single centered column */
+    .split-layout,
+    .split-layout.reverse {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+    .split-layout .text-content,
+    .split-layout .image-content {
+        width: 100%;
+    }
+}
+
+/* Phones */
 @media (max-width: 768px) {
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2rem; }
-    p  { font-size: 1.1rem; }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.6rem; margin-bottom: 1rem; }
+    p  { font-size: 1.05rem; line-height: 1.55; }
+
+    .scroll-section { padding: 3rem 1.25rem; }
+
+    .title-subtitle { font-size: 1.05rem; line-height: 1.6; }
+
+    /* big numbers must not overflow narrow screens */
+    .big-number      { font-size: 3.2rem; }
+    .stat-number     { font-size: 2rem; }
+    .definition-text { font-size: 1.1rem; padding: 1rem; }
+
+    /* stats grid: 2 columns, then 1 on very small screens */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+    .stat-item  { padding: 1.1rem; }
+    .stat-label { font-size: 0.78rem; }
+
+    /* pull quote */
+    .pull-quote { font-size: 1.6rem; padding: 0 0.5rem; }
+    .pull-quote::before { font-size: 4rem; }
+    .pull-attribution { letter-spacing: 1.5px; }
+
+    /* comparison columns stack */
+    .comparison-columns {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        margin-top: 1.75rem;
+    }
+    .comparison-stats {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .stat-divider { transform: rotate(90deg); }
+
+    /* bar chart: shrink so labels and values still fit */
+    .bar-chart       { height: 240px; gap: 1rem; padding: 0 0.25rem; margin-top: 2rem; }
+    .chart-bar-value { font-size: 1.05rem; top: -1.6rem; }
+    .chart-bar-label { font-size: 0.7rem; letter-spacing: 0.5px; }
+
+    /* callouts / CTA / panels */
+    .call-to-action   { padding: 1.5rem; margin-top: 2rem; }
+    .call-to-action p { font-size: 1.1rem; }
+    .key-insight      { padding: 1.1rem; font-size: 1rem; }
+    .fullbleed-panel  { padding: 1.5rem 1.25rem; }
+    .btn-link         { padding: 0.85rem 1.5rem; }
+}
+
+/* Very narrow phones: single-column stats, tighter headings */
+@media (max-width: 480px) {
+    .stats-grid  { grid-template-columns: 1fr; }
+    h1           { font-size: 1.7rem; }
+    .big-number  { font-size: 2.6rem; }
+    .comparison-stats { gap: 1.5rem; }
 }
