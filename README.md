@@ -6,6 +6,8 @@ A [Claude Code](https://claude.com/claude-code) skill that turns an academic pap
 
 *Above: title slot of [`examples/SCS_storyboard/`](examples/SCS_storyboard/) — Sun & Bardhan 2024 "Identifying Hard-to-Decarbonize houses", rendered with `cool / light / modern` and an AI-generated cover.*
 
+> **🖼️ Live gallery:** [**LCAW Storyboards**](https://www.maoran.io/LCAW/) — a set of interactive scrollytelling stories built with this skill for London Climate Action Week (climate, health & the built environment). Includes *Homes on Ice and Fire*, *The Right Tree, the Right Place*, *Screened Eaves*, and *When the House Heats Up*.
+
 ```
 academic PDF  ─►  content.json + figureN.png  ─►  Claude composes storyboard.json  ─►  index.html + style.css + script.js
 ```
@@ -35,7 +37,7 @@ out/
 └── storyboard.json   # the editable narrative — re-render after edits
 ```
 
-Browseable example outputs live under [`examples/`](examples/) — each subdirectory is a self-contained static site (`index.html` + `style.css` + `script.js` + transparent figures + optional cover).
+Browseable example outputs live under [`examples/`](examples/) — each subdirectory is a self-contained static site (`index.html` + `style.css` + `script.js` + transparent figures + optional cover). For a live, deployed gallery of storyboards built with this skill, see [**LCAW Storyboards**](https://www.maoran.io/LCAW/).
 
 ## Install
 
